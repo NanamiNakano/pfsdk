@@ -1,6 +1,6 @@
 import {BasicResponse} from "./common";
 
-type ThirdAuth = {
+export type ThirdAuth = {
   id: number,
   name: string
 }

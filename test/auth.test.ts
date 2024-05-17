@@ -10,7 +10,7 @@ describe("Auth module", () => {
   test("Login", async () => {
     const result = await client.auth.login("admin", "admin")
     expect(result.Ok).toBe(true)
-    expect(client.auth.isAuthenticated).toBe(true)
+    expect(client.isAuthenticated).toBe(true)
   })
 
   // test("Get 3rd-party auth list", async () => {
@@ -33,6 +33,6 @@ describe("Auth module", () => {
   test("Logout", async () => {
     const result = await client.auth.logout()
     expect(result.Ok).toBe(true)
-    expect(client.auth.isAuthenticated).toBe(false)
+    expect(client.isAuthenticated).toBe(false)
   })
 })
