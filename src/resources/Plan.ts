@@ -50,4 +50,43 @@ export class Plan {
       return {Ok: false}
     }
   }
+
+  /**
+   * Renew current plan
+   */
+  async renew(): Promise<BasicResponse> {
+    try {
+      const response = await this.client.axiosInstance.put("/plan/renew")
+      return response.data as BasicResponse
+    } catch (error) {
+      console.log(error)
+      return {Ok: false}
+    }
+  }
+
+  /**
+   * Reset traffic of current plan
+   */
+  async resetTraffic(): Promise<BasicResponse> {
+    try {
+      const response = await this.client.axiosInstance.put("/plan/reset")
+      return response.data as BasicResponse
+    } catch (error) {
+      console.log(error)
+      return {Ok: false}
+    }
+  }
+
+  /**
+   * Toggle auto renew
+   */
+  async toggleAutoRenew(): Promise<BasicResponse> {
+    try {
+      const response = await this.client.axiosInstance.put("/plan/auto_renew")
+      return response.data as BasicResponse
+    } catch (error) {
+      console.log(error)
+      return {Ok: false}
+    }
+  }
 }
