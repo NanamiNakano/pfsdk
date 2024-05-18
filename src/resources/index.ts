@@ -3,6 +3,7 @@
  */
 
 export * from "./Affiliate";
+export * from "./Announcement";
 export * from "./Auth";
 export * from "./Node";
 export * from "./Plan";
