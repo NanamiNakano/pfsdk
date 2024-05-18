@@ -1,7 +1,7 @@
 import { PfClient } from "../src/client"
 import { describe, expect, test } from "@jest/globals"
 
-const endpoint = "https://pf-demo.zeroteam.top/ajax"
+const endpoint = "https://dev.zeroteam.top/ajax"
 
 const client = new PfClient(endpoint)
 

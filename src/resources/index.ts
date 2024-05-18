@@ -7,4 +7,5 @@ export * from "./Announcement";
 export * from "./Auth";
 export * from "./Invoice";
 export * from "./Node";
+export * from "./Payment";
 export * from "./Plan";

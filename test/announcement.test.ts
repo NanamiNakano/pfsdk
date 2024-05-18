@@ -1,7 +1,7 @@
 import { PfClient } from "../src/client"
 import { beforeAll, describe, expect, test } from "@jest/globals"
 
-const endpoint = "https://pf-demo.zeroteam.top/ajax"
+const endpoint = "https://dev.zeroteam.top/ajax"
 
 const client = new PfClient(endpoint)
 beforeAll(async () => {
@@ -15,7 +15,7 @@ describe("Announcement module", () => {
   })
 
   test("Get a specified announcement", async () => {
-    const result = await client.announcement.getAnnouncement(0)
+    const result = await client.announcement.getAnnouncement(1)
     expect(result.Ok).toBeTruthy()
   })
 })

@@ -8,14 +8,19 @@ beforeAll(async () => {
   await client.auth.login("admin", "admin")
 })
 
-describe("Invoice module", () => {
-  test("Get all Invoices", async () => {
-    const result = await client.invoice.getInvoices()
+describe("Payment module", () => {
+  test("Top up", async () => {
+    const result = await client.payment.topUp(5)
     expect(result.Ok).toBeTruthy()
   })
 
-  test("Get a specified invoice", async () => {
-    const result = await client.invoice.getInvoice(1)
+  test("Proceed a payment", async () => {
+    const result = await client.payment.pay(1, 1)
+    expect(result.Ok).toBeTruthy()
+  })
+
+  test("Get available gateways", async () => {
+    const result = await client.payment.getGateways()
     expect(result.Ok).toBeTruthy()
   })
 })

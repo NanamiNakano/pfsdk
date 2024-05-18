@@ -8,6 +8,7 @@ export * from "./auth";
 export * from "./common";
 export * from "./invoice";
 export * from "./node";
+export * from "./payment";
 export * from "./permission";
 export * from "./plan";
 export * from "./user";
