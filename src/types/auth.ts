@@ -6,7 +6,7 @@ export type ThirdAuth = {
 }
 
 export type ThirdAuthListResponse = BasicResponse & {
-  Data?: [ThirdAuth]
+  Data?: ThirdAuth[]
 }
 
 export type ThirdAuthResponse = BasicResponse & {

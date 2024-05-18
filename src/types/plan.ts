@@ -29,8 +29,8 @@ export type PlanData = {
 }
 
 export type PlanListResponse = BasicResponse & {
-  Permission?: [PermissionGroup]
-  Plan?: [PlanData]
+  Permission?: PermissionGroup[]
+  Plan?: PlanData[]
 }
 
 export type CurrentPlanResponse = BasicResponse & {

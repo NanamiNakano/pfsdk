@@ -1,20 +1,16 @@
-import { Affiliate, Auth, Plan } from "../resources"
+import { Affiliate, Auth, Node, Plan } from "../resources"
 import axios, { AxiosInstance } from "axios"
 import { wrapper } from "axios-cookiejar-support"
 import { CookieJar } from "tough-cookie"
-import { BasicResponse } from "../types"
 
 export class PfClient {
-  public axiosInstance: AxiosInstance
+  private readonly axiosInstance: AxiosInstance
   public auth: Auth
   public affiliate: Affiliate
   public plan: Plan
-  private readonly endpoint: string
-  private readonly webSocket: string
+  public node: Node
 
-  constructor(endpoint: string, webSocket: string) {
-    this.endpoint = endpoint
-    this.webSocket = webSocket
+  constructor(endpoint: string) {
     if (typeof window === "undefined") {
       const jar = new CookieJar()
       this.axiosInstance = wrapper(axios.create({
@@ -28,8 +24,9 @@ export class PfClient {
         withCredentials: true
       })
     }
-    this.auth = new Auth(this)
-    this.affiliate = new Affiliate(this)
-    this.plan = new Plan(this)
+    this.auth = new Auth(this.axiosInstance)
+    this.affiliate = new Affiliate(this.axiosInstance)
+    this.plan = new Plan(this.axiosInstance)
+    this.node = new Node(this.axiosInstance)
   }
 }

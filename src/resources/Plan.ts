@@ -1,12 +1,11 @@
-import { PfClient } from "../client"
 import { BasicResponse, CurrentPlanResponse, PlanListResponse } from "../types"
-import { AxiosError } from "axios"
+import { AxiosError, AxiosInstance } from "axios"
 
 export class Plan {
-  private client: PfClient
+  private axiosInstance: AxiosInstance
 
-  constructor(client: PfClient) {
-    this.client = client
+  constructor(axiosInstance: AxiosInstance) {
+    this.axiosInstance = axiosInstance
   }
 
   /**
@@ -14,7 +13,7 @@ export class Plan {
    */
   async getCart(): Promise<PlanListResponse> {
     try {
-      const response = await this.client.axiosInstance.get("/cart")
+      const response = await this.axiosInstance.get("/cart")
       return response.data as PlanListResponse
     } catch (error) {
       if (error instanceof AxiosError && error.response) {
@@ -30,7 +29,7 @@ export class Plan {
    */
   async getCurrentPlan(): Promise<CurrentPlanResponse> {
     try {
-      const response = await this.client.axiosInstance.get("/plan")
+      const response = await this.axiosInstance.get("/plan")
       return response.data as CurrentPlanResponse
     } catch (error) {
       if (error instanceof AxiosError && error.response) {
@@ -50,7 +49,7 @@ export class Plan {
     params.append("id", id.toString())
 
     try {
-      const response = await this.client.axiosInstance.post(`/buy`, params)
+      const response = await this.axiosInstance.post(`/buy`, params)
       return response.data as BasicResponse
     } catch (error) {
       if (error instanceof AxiosError && error.response) {
@@ -66,7 +65,7 @@ export class Plan {
    */
   async renew(): Promise<BasicResponse> {
     try {
-      const response = await this.client.axiosInstance.put("/plan/renew")
+      const response = await this.axiosInstance.put("/plan/renew")
       return response.data as BasicResponse
     } catch (error) {
       if (error instanceof AxiosError && error.response) {
@@ -85,7 +84,7 @@ export class Plan {
    */
   async resetTraffic(): Promise<BasicResponse> {
     try {
-      const response = await this.client.axiosInstance.put("/plan/reset")
+      const response = await this.axiosInstance.put("/plan/reset")
       return response.data as BasicResponse
     } catch (error) {
       if (error instanceof AxiosError && error.response) {
@@ -101,7 +100,7 @@ export class Plan {
    */
   async toggleAutoRenew(): Promise<BasicResponse> {
     try {
-      const response = await this.client.axiosInstance.put("/plan/auto_renew")
+      const response = await this.axiosInstance.put("/plan/auto_renew")
       return response.data as BasicResponse
     } catch (error) {
       if (error instanceof AxiosError && error.response) {

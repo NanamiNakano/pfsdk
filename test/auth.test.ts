@@ -1,11 +1,9 @@
 import { PfClient } from "../src/client"
 import { describe, expect, test } from "@jest/globals"
 
-
 const endpoint = "https://pf-demo.zeroteam.top/ajax"
-const webSocket = "wss://pf-demo.zeroteam.top/ws"
 
-const client = new PfClient(endpoint, webSocket)
+const client = new PfClient(endpoint)
 
 describe("Auth module", () => {
   test("Login", async () => {

@@ -1,12 +1,11 @@
-import { PfClient } from "../client"
-import { AffiliateDateResponse, BalanceLogResponse, BasicResponse, QueryParams } from "../types"
-import { AxiosError } from "axios"
+import { AffiliateDataResponse, BalanceLogResponse, BasicResponse, QueryParams } from "../types"
+import { AxiosError, AxiosInstance } from "axios"
 
 export class Affiliate {
-  private client: PfClient
+  private axiosInstance: AxiosInstance
 
-  constructor(client: PfClient) {
-    this.client = client
+  constructor(axiosInstance: AxiosInstance) {
+    this.axiosInstance = axiosInstance
   }
 
   /**
@@ -15,7 +14,7 @@ export class Affiliate {
   async getBalanceLogs(): Promise<BalanceLogResponse>
 
   /**
-   * Get specific balance log
+   * Get a list of balance log with query params
    * @param query
    */
   async getBalanceLogs(query: QueryParams): Promise<BalanceLogResponse>
@@ -23,12 +22,12 @@ export class Affiliate {
   async getBalanceLogs(query?: QueryParams): Promise<BalanceLogResponse> {
     try {
       if (query) {
-        const response = await this.client.axiosInstance.get("/balance/logs", {
+        const response = await this.axiosInstance.get("/affiliate/balance/logs", {
           params: query
         })
         return response.data as BalanceLogResponse
       }
-      const response = await this.client.axiosInstance.get("/balance/logs")
+      const response = await this.axiosInstance.get("/affiliate/balance/logs")
       return response.data as BalanceLogResponse
     } catch (error) {
       if (error instanceof AxiosError && error.response) {
@@ -42,16 +41,16 @@ export class Affiliate {
   /**
    * Get data of affiliate system
    */
-  async getData(): Promise<AffiliateDateResponse> {
+  async getData(): Promise<AffiliateDataResponse> {
     try {
-      const response = await this.client.axiosInstance.get("/affiliate")
+      const response = await this.axiosInstance.get("/affiliate")
       if (response.data.Data === null) {
         return {
           Msg: "邀请系统未激活",
           Ok: false
         }
       }
-      return response.data as AffiliateDateResponse
+      return response.data as AffiliateDataResponse
     } catch (error) {
       if (error instanceof AxiosError && error.response) {
         return error.response.data as BasicResponse
@@ -66,7 +65,7 @@ export class Affiliate {
    */
   async active(): Promise<BasicResponse> {
     try {
-      const response = await this.client.axiosInstance.post("/affiliate")
+      const response = await this.axiosInstance.post("/affiliate")
       return response.data
     } catch (error) {
       if (error instanceof AxiosError && error.response) {
@@ -86,7 +85,7 @@ export class Affiliate {
     params.append("money", amount.toString())
 
     try {
-      const response = await this.client.axiosInstance.put("/affiliate/payout", params)
+      const response = await this.axiosInstance.put("/affiliate/payout", params)
       return response.data
     } catch (error) {
       if (error instanceof AxiosError && error.response) {

@@ -12,7 +12,7 @@ export type BalanceLog = {
 }
 
 export type BalanceLogResponse = BasicResponse & {
-  Data?: [BalanceLog]
+  Data?: BalanceLog[]
   Count?: number
 }
 
@@ -23,6 +23,6 @@ export type AffiliateData = {
   created_at: string,
 }
 
-export type AffiliateDateResponse = BasicResponse & {
+export type AffiliateDataResponse = BasicResponse & {
   Data?: AffiliateData
 }
