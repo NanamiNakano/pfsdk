@@ -1,4 +1,4 @@
-import {Config} from "./common";
+import { Config } from "./common"
 
 export type UserData = {
   id: number

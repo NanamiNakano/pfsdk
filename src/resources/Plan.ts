@@ -1,5 +1,6 @@
-import {PfClient} from "../client";
-import {BasicResponse, CurrentPlanResponse, PlanListResponse} from "../types"
+import { PfClient } from "../client"
+import { BasicResponse, CurrentPlanResponse, PlanListResponse } from "../types"
+import { AxiosError } from "axios"
 
 export class Plan {
   private client: PfClient
@@ -16,8 +17,11 @@ export class Plan {
       const response = await this.client.axiosInstance.get("/cart")
       return response.data as PlanListResponse
     } catch (error) {
+      if (error instanceof AxiosError && error.response) {
+        return error.response.data as BasicResponse
+      }
       console.log(error)
-      return {Ok: false}
+      return { Ok: false }
     }
   }
 
@@ -29,8 +33,11 @@ export class Plan {
       const response = await this.client.axiosInstance.get("/plan")
       return response.data as CurrentPlanResponse
     } catch (error) {
+      if (error instanceof AxiosError && error.response) {
+        return error.response.data as BasicResponse
+      }
       console.log(error)
-      return {Ok: false}
+      return { Ok: false }
     }
   }
 
@@ -46,8 +53,11 @@ export class Plan {
       const response = await this.client.axiosInstance.post(`/buy`, params)
       return response.data as BasicResponse
     } catch (error) {
+      if (error instanceof AxiosError && error.response) {
+        return error.response.data as BasicResponse
+      }
       console.log(error)
-      return {Ok: false}
+      return { Ok: false }
     }
   }
 
@@ -59,8 +69,14 @@ export class Plan {
       const response = await this.client.axiosInstance.put("/plan/renew")
       return response.data as BasicResponse
     } catch (error) {
+      if (error instanceof AxiosError && error.response) {
+        if (error.response.status === 304) {
+          return { Msg: "无需续订", Ok: false}
+        }
+        return error.response.data as BasicResponse
+      }
       console.log(error)
-      return {Ok: false}
+      return { Ok: false }
     }
   }
 
@@ -72,8 +88,11 @@ export class Plan {
       const response = await this.client.axiosInstance.put("/plan/reset")
       return response.data as BasicResponse
     } catch (error) {
+      if (error instanceof AxiosError && error.response) {
+        return error.response.data as BasicResponse
+      }
       console.log(error)
-      return {Ok: false}
+      return { Ok: false }
     }
   }
 
@@ -85,8 +104,11 @@ export class Plan {
       const response = await this.client.axiosInstance.put("/plan/auto_renew")
       return response.data as BasicResponse
     } catch (error) {
+      if (error instanceof AxiosError && error.response) {
+        return error.response.data as BasicResponse
+      }
       console.log(error)
-      return {Ok: false}
+      return { Ok: false }
     }
   }
 }

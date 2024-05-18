@@ -1,5 +1,6 @@
-import {PfClient} from "../client";
-import {AffiliateDateResponse, BalanceLogResponse, BasicResponse, QueryParams} from "../types";
+import { PfClient } from "../client"
+import { AffiliateDateResponse, BalanceLogResponse, BasicResponse, QueryParams } from "../types"
+import { AxiosError } from "axios"
 
 export class Affiliate {
   private client: PfClient
@@ -11,7 +12,7 @@ export class Affiliate {
   /**
    * Get a list of balance log
    */
-  async getBalanceLogs():  Promise<BalanceLogResponse>
+  async getBalanceLogs(): Promise<BalanceLogResponse>
 
   /**
    * Get specific balance log
@@ -30,8 +31,11 @@ export class Affiliate {
       const response = await this.client.axiosInstance.get("/balance/logs")
       return response.data as BalanceLogResponse
     } catch (error) {
+      if (error instanceof AxiosError && error.response) {
+        return error.response.data as BasicResponse
+      }
       console.log(error)
-      return {Ok: false}
+      return { Ok: false }
     }
   }
 
@@ -49,8 +53,11 @@ export class Affiliate {
       }
       return response.data as AffiliateDateResponse
     } catch (error) {
+      if (error instanceof AxiosError && error.response) {
+        return error.response.data as BasicResponse
+      }
       console.log(error)
-      return {Ok: false}
+      return { Ok: false }
     }
   }
 
@@ -62,8 +69,11 @@ export class Affiliate {
       const response = await this.client.axiosInstance.post("/affiliate")
       return response.data
     } catch (error) {
+      if (error instanceof AxiosError && error.response) {
+        return error.response.data as BasicResponse
+      }
       console.log(error)
-      return {Ok: false}
+      return { Ok: false }
     }
   }
 
@@ -79,8 +89,11 @@ export class Affiliate {
       const response = await this.client.axiosInstance.put("/affiliate/payout", params)
       return response.data
     } catch (error) {
+      if (error instanceof AxiosError && error.response) {
+        return error.response.data as BasicResponse
+      }
       console.log(error)
-      return {Ok: false}
+      return { Ok: false }
     }
   }
 }

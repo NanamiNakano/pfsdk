@@ -1,6 +1,6 @@
-import {BasicResponse, Config} from "./common";
-import {PermissionGroup} from "./permission";
-import {UserData} from "./user"
+import { BasicResponse, Config } from "./common"
+import { PermissionGroup } from "./permission"
+import { UserData } from "./user"
 
 export type PlanData = {
   id: number

@@ -1,8 +1,9 @@
-import {BasicResponse, ThirdAuthListResponse, ThirdAuthResponse} from "../types";
-import {PfClient} from "../client";
+import { BasicResponse, ThirdAuthListResponse, ThirdAuthResponse } from "../types"
+import { PfClient } from "../client"
+import { AxiosError } from "axios"
 
 export class Auth {
-  private client: PfClient;
+  private client: PfClient
 
   constructor(client: PfClient) {
     this.client = client
@@ -20,11 +21,13 @@ export class Auth {
 
     try {
       const response = await this.client.axiosInstance.post("/login", params)
-      this.client.isAuthenticated = true
       return response.data as BasicResponse
     } catch (error) {
+      if (error instanceof AxiosError && error.response) {
+        return error.response.data as BasicResponse
+      }
       console.log(error)
-      return {Ok: false}
+      return { Ok: false }
     }
   }
 
@@ -36,8 +39,11 @@ export class Auth {
       const response = await this.client.axiosInstance.get("/auth")
       return response.data as ThirdAuthListResponse
     } catch (error) {
+      if (error instanceof AxiosError && error.response) {
+        return error.response.data as BasicResponse
+      }
       console.log(error)
-      return {Ok: false}
+      return { Ok: false }
     }
   }
 
@@ -47,11 +53,14 @@ export class Auth {
    */
   async getAuth(id: number): Promise<ThirdAuthResponse> {
     try {
-      const response = await this.client.axiosInstance.get(`/auth/${id}`)
+      const response = await this.client.axiosInstance.get(`/auth/${ id }`)
       return response.data as ThirdAuthResponse
     } catch (error) {
+      if (error instanceof AxiosError && error.response) {
+        return error.response.data as BasicResponse
+      }
       console.log(error)
-      return {Ok: false}
+      return { Ok: false }
     }
   }
 
@@ -77,8 +86,11 @@ export class Auth {
       const response = await this.client.axiosInstance.post("/register", params)
       return response.data as BasicResponse
     } catch (error) {
+      if (error instanceof AxiosError && error.response) {
+        return error.response.data as BasicResponse
+      }
       console.log(error)
-      return {Ok: false}
+      return { Ok: false }
     }
   }
 
@@ -88,11 +100,13 @@ export class Auth {
   async logout(): Promise<BasicResponse> {
     try {
       const response = await this.client.axiosInstance.get("/logout")
-      this.client.isAuthenticated = false
       return response.data as BasicResponse
     } catch (error) {
+      if (error instanceof AxiosError && error.response) {
+        return error.response.data as BasicResponse
+      }
       console.log(error)
-      return {Ok: false}
+      return { Ok: false }
     }
   }
 }

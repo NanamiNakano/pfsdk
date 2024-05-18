@@ -1,4 +1,4 @@
-import {BasicResponse} from "./common";
+import { BasicResponse } from "./common"
 
 export type BalanceLog = {
   id: number,
