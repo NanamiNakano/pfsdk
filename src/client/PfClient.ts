@@ -1,10 +1,9 @@
-import { Affiliate, Announcement, Auth, Invoice, Node, Payment, Plan } from "../resources"
+import { Affiliate, Announcement, Auth, Invoice, Node, Payment, Plan, System } from "../resources"
 import axios, { AxiosInstance } from "axios"
 import { wrapper } from "axios-cookiejar-support"
 import { CookieJar } from "tough-cookie"
 
 export class PfClient {
-  private readonly axiosInstance: AxiosInstance
   public auth: Auth
   public affiliate: Affiliate
   public announcement: Announcement
@@ -12,6 +11,8 @@ export class PfClient {
   public node: Node
   public invoice: Invoice
   public payment: Payment
+  public system: System
+  private readonly axiosInstance: AxiosInstance
 
   constructor(endpoint: string) {
     if (typeof window === "undefined") {
@@ -34,5 +35,6 @@ export class PfClient {
     this.node = new Node(this.axiosInstance)
     this.invoice = new Invoice(this.axiosInstance)
     this.payment = new Payment(this.axiosInstance)
+    this.system = new System(this.axiosInstance)
   }
 }

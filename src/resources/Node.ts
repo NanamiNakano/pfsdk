@@ -51,7 +51,7 @@ export class Node {
    */
   async getNode(id: number): Promise<NodeDataResponse> {
     try {
-      const response = await this.axiosInstance.get(`/node?id=${id}`)
+      const response = await this.axiosInstance.get(`/node?id=${ id }`)
       return response.data as NodeDataResponse
     } catch (error) {
       if (error instanceof AxiosError && error.response) {
@@ -114,7 +114,7 @@ export class Node {
    */
   async getNatNode(id: number): Promise<NatNodeDataResponse> {
     try {
-      const response = await this.axiosInstance.get(`/nat_node?id=${id}`)
+      const response = await this.axiosInstance.get(`/nat_node?id=${ id }`)
       return response.data as NatNodeDataResponse
     } catch (error) {
       if (error instanceof AxiosError && error.response) {

@@ -44,7 +44,7 @@ export class Invoice {
    */
   async getInvoice(id: number): Promise<InvoiceDataResponse> {
     try {
-      const response = await this.axiosInstance.get(`/invoice?id=${id}`)
+      const response = await this.axiosInstance.get(`/invoice?id=${ id }`)
       return response.data as InvoiceDataResponse
     } catch (error) {
       if (error instanceof AxiosError && error.response) {

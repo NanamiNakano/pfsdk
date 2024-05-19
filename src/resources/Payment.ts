@@ -35,7 +35,7 @@ export class Payment {
    */
   async pay(gatewayId: number, invoiceId: number): Promise<PayResponse> {
     try {
-      const response = await this.axiosInstance.get(`/pay/${gatewayId}?id=${invoiceId}`)
+      const response = await this.axiosInstance.get(`/pay/${ gatewayId }?id=${ invoiceId }`)
       return response.data as PayResponse
     } catch (error) {
       if (error instanceof AxiosError && error.response) {

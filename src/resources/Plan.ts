@@ -70,7 +70,7 @@ export class Plan {
     } catch (error) {
       if (error instanceof AxiosError && error.response) {
         if (error.response.status === 304) {
-          return { Msg: "无需续订", Ok: false}
+          return { Msg: "无需续订", Ok: false }
         }
         return error.response.data as BasicResponse
       }

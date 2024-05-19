@@ -44,7 +44,7 @@ export class Announcement {
    */
   async getAnnouncement(id: number): Promise<AnnouncementDataResponse> {
     try {
-      const response = await this.axiosInstance.get(`/announcement?id=${id}`)
+      const response = await this.axiosInstance.get(`/announcement?id=${ id }`)
       return response.data as AnnouncementDataResponse
     } catch (error) {
       if (error instanceof AxiosError && error.response) {
