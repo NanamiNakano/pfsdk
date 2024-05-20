@@ -26,8 +26,8 @@ export type NodeData = {
   blocked_hostname: string
   blocked_protocol: string
   port_range: string
-  reseved_ports: string
-  reseved_target_ports: string
+  reserved_ports: string
+  reserved_target_ports: string
   note: string
   updated: string
   permission: number

@@ -13,18 +13,20 @@ export class PfClient {
   public payment: Payment
   public system: System
   private readonly axiosInstance: AxiosInstance
+  private readonly webSocket: string
 
   constructor(endpoint: string) {
+    this.webSocket = `wss://${ endpoint }/ws`
     if (typeof window === "undefined") {
       const jar = new CookieJar()
       this.axiosInstance = wrapper(axios.create({
         jar,
-        baseURL: endpoint,
+        baseURL: `https://${ endpoint }/ajax`,
         withCredentials: true
       }))
     } else {
       this.axiosInstance = axios.create({
-        baseURL: endpoint,
+        baseURL: `https://${ endpoint }/ajax`,
         withCredentials: true
       })
     }

@@ -13,15 +13,18 @@
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
+    "@types/tough-cookie": "^4.0.5",
+    "@types/ws": "^8.5.10",
     "barrelsby": "^2.8.1",
+    "install": "^0.13.0",
     "jest": "^29.7.0",
     "ts-jest": "^29.1.2",
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "@types/tough-cookie": "^4.0.5",
     "axios": "^1.6.8",
     "axios-cookiejar-support": "^5.0.2",
-    "tough-cookie": "^4.1.4"
+    "tough-cookie": "^4.1.4",
+    "ws": "^8.17.0"
   }
 }
