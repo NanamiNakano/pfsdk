@@ -1,6 +1,6 @@
 import { BasicResponse } from "./common"
 
-export type BalanceLog = {
+export type AffiliateBalanceLog = {
   id: number,
   user_id: number,
   type: "charge" | "payout",
@@ -11,8 +11,8 @@ export type BalanceLog = {
   created_at: string
 }
 
-export type BalanceLogResponse = BasicResponse & {
-  Data?: BalanceLog[]
+export type AffiliateBalanceLogResponse = BasicResponse & {
+  Data?: AffiliateBalanceLog[]
   Count?: number
 }
 

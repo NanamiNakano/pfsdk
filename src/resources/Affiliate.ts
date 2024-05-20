@@ -1,4 +1,4 @@
-import { AffiliateDataResponse, BalanceLogResponse, BasicResponse, QueryParams } from "../types"
+import { AffiliateDataResponse, AffiliateBalanceLogResponse, BasicResponse, QueryParams } from "../types"
 import { AxiosError, AxiosInstance } from "axios"
 
 export class Affiliate {
@@ -9,26 +9,26 @@ export class Affiliate {
   }
 
   /**
-   * Get a list of balance log
+   * Get a list of affiliation balance log
    */
-  async getBalanceLogs(): Promise<BalanceLogResponse>
+  async getBalanceLogs(): Promise<AffiliateBalanceLogResponse>
 
   /**
-   * Get a list of balance log with query params
+   * Get a list of affiliation balance log with query params
    * @param query
    */
-  async getBalanceLogs(query: QueryParams): Promise<BalanceLogResponse>
+  async getBalanceLogs(query: QueryParams): Promise<AffiliateBalanceLogResponse>
 
-  async getBalanceLogs(query?: QueryParams): Promise<BalanceLogResponse> {
+  async getBalanceLogs(query?: QueryParams): Promise<AffiliateBalanceLogResponse> {
     try {
       if (query) {
         const response = await this.axiosInstance.get("/affiliate/balance/logs", {
           params: query
         })
-        return response.data as BalanceLogResponse
+        return response.data as AffiliateBalanceLogResponse
       }
       const response = await this.axiosInstance.get("/affiliate/balance/logs")
-      return response.data as BalanceLogResponse
+      return response.data as AffiliateBalanceLogResponse
     } catch (error) {
       if (error instanceof AxiosError && error.response) {
         return error.response.data as BasicResponse

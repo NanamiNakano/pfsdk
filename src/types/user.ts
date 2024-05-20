@@ -1,4 +1,4 @@
-import { Config } from "./common"
+import { BasicResponse, Config } from "./common"
 
 export type UserData = {
   id: number
@@ -26,4 +26,41 @@ export type UserData = {
   permission: number
   token: string
   registration_date: string
+}
+
+export type UserDataResponse = BasicResponse & {
+  Data?: UserData
+}
+
+export type BalanceLog = {
+  id: number
+  user_id: number
+  type: string
+  value: number
+  origin_value: number
+  new_value: number
+  note: string
+  created_at: string
+}
+
+export type BalanceLogResponse = BasicResponse & {
+  Data?: BalanceLog[]
+  Count?: number
+}
+
+export type AffiliationData = {
+  id: number
+  user_id: number
+  invite_user_id: number
+  first_charged: boolean
+  created_at: string
+}
+
+export type AffiliationResponse = BasicResponse & {
+  Data?: AffiliationData[]
+  Count?: number
+}
+
+export type ResetTokenResponse = BasicResponse & {
+  Token?: string
 }

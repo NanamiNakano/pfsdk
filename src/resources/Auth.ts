@@ -32,6 +32,7 @@ export class Auth {
 
   /**
    * Get a list of 3rd-party authentication interface
+   * @deprecated 3rd-party authentication is no longer supported
    */
   async getAuthList(): Promise<ThirdAuthListResponse> {
     try {
@@ -49,6 +50,7 @@ export class Auth {
   /**
    * Get specific 3rd-party authentication interface
    * @param id
+   * @deprecated 3rd-party authentication is no longer supported
    */
   async getAuth(id: number): Promise<ThirdAuthResponse> {
     try {
