@@ -28,8 +28,15 @@ export type UserData = {
   registration_date: string
 }
 
+export type PendingUserData = Omit<UserData, "id">
+
 export type UserDataResponse = BasicResponse & {
   Data?: UserData
+}
+
+export type UserDataListResponse = BasicResponse & {
+  Data?: UserData[]
+  Count?: number
 }
 
 export type BalanceLog = {

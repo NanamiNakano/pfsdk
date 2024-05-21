@@ -1,16 +1,21 @@
 import { PfClient } from "../src/client"
 import { beforeAll, describe, expect, test } from "@jest/globals"
+import { QueryParams } from "../src/types"
 
 const endpoint = "dev.zeroteam.top"
 
 const client = new PfClient(endpoint)
+const query = {
+  limit: 1
+} as QueryParams
+
 beforeAll(async () => {
   await client.auth.login("admin", "admin")
 })
 
 describe("Invoice module", () => {
   test("Get all Invoices", async () => {
-    const result = await client.invoice.getInvoices()
+    const result = await client.invoice.getInvoices(query)
     expect(result.Ok).toBeTruthy()
   })
 

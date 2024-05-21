@@ -1,16 +1,21 @@
 import { PfClient } from "../src/client"
 import { beforeAll, describe, expect, test } from "@jest/globals"
+import { QueryParams } from "../src/types"
 
 const endpoint = "dev.zeroteam.top"
 
 const client = new PfClient(endpoint)
+const query = {
+  limit: 1
+} as QueryParams
+
 beforeAll(async () => {
   await client.auth.login("admin", "admin")
 })
 
 describe("Node module", () => {
   test("Get available nodes", async () => {
-    const result = await client.node.getNodes()
+    const result = await client.node.getNodes(query)
     expect(result.Ok).toBeTruthy()
   })
 
@@ -25,7 +30,7 @@ describe("Node module", () => {
   })
 
   test("Get available nat nodes", async () => {
-    const result = await client.node.getNatNodes()
+    const result = await client.node.getNatNodes(query)
     expect(result.Ok).toBeTruthy()
   })
 

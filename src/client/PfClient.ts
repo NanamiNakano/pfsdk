@@ -1,9 +1,10 @@
-import { Affiliate, Announcement, Auth, Invoice, Node, Payment, Plan, System, User } from "../resources"
+import { Admin, Affiliate, Announcement, Auth, Invoice, Node, Payment, Plan, System, User } from "../resources"
 import axios, { AxiosInstance } from "axios"
 import { wrapper } from "axios-cookiejar-support"
 import { CookieJar } from "tough-cookie"
 
 export class PfClient {
+  public admin: Admin
   public auth: Auth
   public affiliate: Affiliate
   public announcement: Announcement
@@ -29,6 +30,7 @@ export class PfClient {
         withCredentials: true
       })
     }
+    this.admin = new Admin(this.axiosInstance)
     this.auth = new Auth(this.axiosInstance)
     this.affiliate = new Affiliate(this.axiosInstance)
     this.announcement = new Announcement(this.axiosInstance)

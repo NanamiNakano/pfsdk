@@ -11,3 +11,4 @@ export * from "./Payment";
 export * from "./Plan";
 export * from "./System";
 export * from "./User";
+export * from "./admin/index";

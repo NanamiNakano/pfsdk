@@ -1,5 +1,6 @@
 import { PfClient } from "../src/client"
 import { afterAll, beforeAll, describe, expect, test } from "@jest/globals"
+import { QueryParams } from "../src/types"
 
 const endpoint = "dev.zeroteam.top"
 
@@ -49,5 +50,12 @@ describe("User module", () => {
 
 afterAll(async () => {
   await client.auth.login("admin", "admin")
-  //TODO: Delete test account
+  const query = {
+    filter: "username",
+    search: username
+  } as QueryParams
+  const result = await client.admin.user.getAll(query)
+  if (result.Data) {
+    await client.admin.user.delete(result.Data[0].id)
+  }
 })
