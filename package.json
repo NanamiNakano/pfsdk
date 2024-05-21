@@ -1,5 +1,5 @@
 {
-  "name": "pfsdk",
+  "name": "@nanaminakano/pfsdk",
   "version": "0.1.0",
   "description": "TypeScript SDK for PortForward API",
   "main": "dist/index.js",
