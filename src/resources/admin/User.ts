@@ -1,5 +1,6 @@
 import { AxiosError, AxiosInstance } from "axios"
 import {
+  AddUserResponse,
   AffiliationResponse,
   BalanceLogResponse,
   BasicResponse, PendingUserData,
@@ -128,13 +129,13 @@ export class AdminUser {
    * Add a user
    * @param user
    */
-  async add(user: PendingUserData): Promise<BasicResponse> {
+  async add(user: PendingUserData): Promise<AddUserResponse> {
     try {
       const response = await this.axiosInstance.post("/admin/user", user)
-      return response.data as BasicResponse
+      return response.data as AddUserResponse
     } catch (error) {
       if (error instanceof AxiosError && error.response) {
-        return error.response.data as BasicResponse
+        return error.response.data as AddUserResponse
       }
       console.log(error)
       return { Ok: false }
@@ -148,7 +149,7 @@ export class AdminUser {
    */
   async modify(userId: number, user: PendingUserData): Promise<BasicResponse> {
     try {
-      const response = await this.axiosInstance.post(`/admin/user?id=${userId}`, user)
+      const response = await this.axiosInstance.put(`/admin/user?id=${userId}`, user)
       return response.data as BasicResponse
     } catch (error) {
       if (error instanceof AxiosError && error.response) {

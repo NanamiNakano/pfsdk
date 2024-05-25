@@ -71,3 +71,7 @@ export type AffiliationResponse = BasicResponse & {
 export type ResetTokenResponse = BasicResponse & {
   Token?: string
 }
+
+export type AddUserResponse = BasicResponse & {
+  ID?: number
+}
