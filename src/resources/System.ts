@@ -1,5 +1,6 @@
-import { AxiosError, AxiosInstance } from "axios"
-import { PluginDataResponse, PluginScriptResponse, SystemSettingsResponse } from "../types/system"
+import type { AxiosInstance } from "axios"
+import axios from "axios"
+import type { PluginDataResponse, PluginScriptResponse, SystemSettingsResponse } from "../types/system"
 
 export class System {
   private axiosInstance: AxiosInstance
@@ -15,12 +16,11 @@ export class System {
     try {
       const response = await this.axiosInstance.get("/settings")
       return response.data as SystemSettingsResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (axios.isAxiosError(error) && error.response)
         return error.response.data as SystemSettingsResponse
-      }
-      console.log(error)
-      return { Ok: false }
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 
@@ -31,12 +31,11 @@ export class System {
     try {
       const response = await this.axiosInstance.get("/pages")
       return response.data as PluginDataResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (axios.isAxiosError(error) && error.response)
         return error.response.data as PluginDataResponse
-      }
-      console.log(error)
-      return { Ok: false }
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 
@@ -47,12 +46,11 @@ export class System {
     try {
       const response = await this.axiosInstance.get("/scripts")
       return response.data as PluginScriptResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (axios.isAxiosError(error) && error.response)
         return error.response.data as PluginScriptResponse
-      }
-      console.log(error)
-      return { Ok: false }
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 }

@@ -1,5 +1,6 @@
-import { BasicResponse, CurrentPlanResponse, PlanListResponse } from "../types"
-import { AxiosError, AxiosInstance } from "axios"
+import type { AxiosInstance } from "axios"
+import { AxiosError } from "axios"
+import type { BasicResponse, CurrentPlanResponse, PlanListResponse } from "../types"
 
 export class Plan {
   private axiosInstance: AxiosInstance
@@ -15,10 +16,11 @@ export class Plan {
     try {
       const response = await this.axiosInstance.get("/cart")
       return response.data as PlanListResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data as BasicResponse
-      }
+
       console.log(error)
       return { Ok: false }
     }
@@ -31,10 +33,11 @@ export class Plan {
     try {
       const response = await this.axiosInstance.get("/plan")
       return response.data as CurrentPlanResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data as BasicResponse
-      }
+
       console.log(error)
       return { Ok: false }
     }
@@ -51,10 +54,11 @@ export class Plan {
     try {
       const response = await this.axiosInstance.post(`/buy`, params)
       return response.data as BasicResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data as BasicResponse
-      }
+
       console.log(error)
       return { Ok: false }
     }
@@ -67,11 +71,12 @@ export class Plan {
     try {
       const response = await this.axiosInstance.put("/plan/renew")
       return response.data as BasicResponse
-    } catch (error) {
+    }
+    catch (error) {
       if (error instanceof AxiosError && error.response) {
-        if (error.response.status === 304) {
+        if (error.response.status === 304)
           return { Msg: "无需续订", Ok: false }
-        }
+
         return error.response.data as BasicResponse
       }
       console.log(error)
@@ -86,10 +91,11 @@ export class Plan {
     try {
       const response = await this.axiosInstance.put("/plan/reset")
       return response.data as BasicResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data as BasicResponse
-      }
+
       console.log(error)
       return { Ok: false }
     }
@@ -102,10 +108,11 @@ export class Plan {
     try {
       const response = await this.axiosInstance.put("/plan/auto_renew")
       return response.data as BasicResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data as BasicResponse
-      }
+
       console.log(error)
       return { Ok: false }
     }

@@ -1,5 +1,6 @@
-import { AxiosError, AxiosInstance } from "axios"
-import { AnnouncementDataResponse, AnnouncementListResponse, QueryParams } from "../types"
+import type { AxiosInstance } from "axios"
+import { AxiosError } from "axios"
+import type { AnnouncementDataResponse, AnnouncementListResponse, QueryParams } from "../types"
 
 export class Announcement {
   private axiosInstance: AxiosInstance
@@ -23,16 +24,17 @@ export class Announcement {
     try {
       if (query) {
         const response = await this.axiosInstance.get("/announcement", {
-          params: query
+          params: query,
         })
         return response.data as AnnouncementListResponse
       }
       const response = await this.axiosInstance.get("/announcement")
       return response.data as AnnouncementListResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data
-      }
+
       console.log(error)
       return { Ok: false }
     }
@@ -44,12 +46,13 @@ export class Announcement {
    */
   async getAnnouncement(id: number): Promise<AnnouncementDataResponse> {
     try {
-      const response = await this.axiosInstance.get(`/announcement?id=${ id }`)
+      const response = await this.axiosInstance.get(`/announcement?id=${id}`)
       return response.data as AnnouncementDataResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data
-      }
+
       console.log(error)
       return { Ok: false }
     }

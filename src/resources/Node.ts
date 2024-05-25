@@ -1,12 +1,13 @@
-import {
+import type { AxiosInstance } from "axios"
+import { AxiosError } from "axios"
+import type {
   NatNodeDataResponse,
   NatNodeListResponse,
   NodeDataResponse,
   NodeListResponse,
   NodeSessionResponse,
-  QueryParams
+  QueryParams,
 } from "../types"
-import { AxiosError, AxiosInstance } from "axios"
 
 export class Node {
   private axiosInstance: AxiosInstance
@@ -30,16 +31,17 @@ export class Node {
     try {
       if (query) {
         const response = await this.axiosInstance.get("/node", {
-          params: query
+          params: query,
         })
         return response.data as NodeListResponse
       }
       const response = await this.axiosInstance.get("/node")
       return response.data as NodeListResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data
-      }
+
       console.log(error)
       return { Ok: false }
     }
@@ -51,12 +53,13 @@ export class Node {
    */
   async getNode(id: number): Promise<NodeDataResponse> {
     try {
-      const response = await this.axiosInstance.get(`/node?id=${ id }`)
+      const response = await this.axiosInstance.get(`/node?id=${id}`)
       return response.data as NodeDataResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data
-      }
+
       console.log(error)
       return { Ok: false }
     }
@@ -69,10 +72,11 @@ export class Node {
     try {
       const response = await this.axiosInstance.get("/node/session")
       return response.data
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data
-      }
+
       console.log(error)
       return { Ok: false }
     }
@@ -93,16 +97,17 @@ export class Node {
     try {
       if (query) {
         const response = await this.axiosInstance.get("/nat_node", {
-          params: query
+          params: query,
         })
         return response.data as NatNodeListResponse
       }
       const response = await this.axiosInstance.get("/nat_node")
       return response.data as NatNodeListResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data
-      }
+
       console.log(error)
       return { Ok: false }
     }
@@ -114,12 +119,13 @@ export class Node {
    */
   async getNatNode(id: number): Promise<NatNodeDataResponse> {
     try {
-      const response = await this.axiosInstance.get(`/nat_node?id=${ id }`)
+      const response = await this.axiosInstance.get(`/nat_node?id=${id}`)
       return response.data as NatNodeDataResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data
-      }
+
       console.log(error)
       return { Ok: false }
     }

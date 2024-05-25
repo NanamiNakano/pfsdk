@@ -1,5 +1,6 @@
-import { AxiosError, AxiosInstance } from "axios"
-import { InvoiceDataResponse, InvoiceListResponse, QueryParams } from "../types"
+import type { AxiosInstance } from "axios"
+import { AxiosError } from "axios"
+import type { InvoiceDataResponse, InvoiceListResponse, QueryParams } from "../types"
 
 export class Invoice {
   private axiosInstance: AxiosInstance
@@ -23,16 +24,17 @@ export class Invoice {
     try {
       if (query) {
         const response = await this.axiosInstance.get("/invoice", {
-          params: query
+          params: query,
         })
         return response.data as InvoiceListResponse
       }
       const response = await this.axiosInstance.get("/invoice")
       return response.data as InvoiceListResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data
-      }
+
       console.log(error)
       return { Ok: false }
     }
@@ -44,12 +46,13 @@ export class Invoice {
    */
   async getInvoice(id: number): Promise<InvoiceDataResponse> {
     try {
-      const response = await this.axiosInstance.get(`/invoice?id=${ id }`)
+      const response = await this.axiosInstance.get(`/invoice?id=${id}`)
       return response.data as InvoiceDataResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data
-      }
+
       console.log(error)
       return { Ok: false }
     }

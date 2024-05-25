@@ -1,12 +1,12 @@
-import { PfClient } from "../src/client"
 import { beforeAll, describe, expect, test } from "@jest/globals"
-import { QueryParams } from "../src/types"
+import { PfClient } from "../src/client"
+import type { QueryParams } from "../src/types"
 
 const endpoint = "dev.zeroteam.top"
 
 const client = new PfClient(endpoint)
 const query = {
-  limit: 1
+  limit: 1,
 } as QueryParams
 
 beforeAll(async () => {

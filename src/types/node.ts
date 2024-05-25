@@ -1,6 +1,6 @@
-import { BasicResponse } from "./common"
+import type { BasicResponse } from "./common"
 
-export type NodeData = {
+export interface NodeData {
   id: number
   name: string
   addr: string
@@ -42,7 +42,7 @@ export type NodeDataResponse = BasicResponse & {
   Data?: NodeData
 }
 
-export type NodeSessionData = {
+export interface NodeSessionData {
   [key: string | number]: string[]
 }
 

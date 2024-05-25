@@ -1,9 +1,9 @@
-export type BasicResponse = {
+export interface BasicResponse {
   Msg?: string
   Ok: boolean
 }
 
-export type QueryParams = {
+export interface QueryParams {
   limit?: number
   offset?: number
   filter?: string
@@ -13,6 +13,6 @@ export type QueryParams = {
   sort?: string
 }
 
-export type Config = {
+export interface Config {
   [key: string]: string
 }

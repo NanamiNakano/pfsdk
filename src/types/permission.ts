@@ -1,4 +1,4 @@
-export type PermissionGroup = {
+export interface PermissionGroup {
   id: number
   name: string
   nodes: string // Split using "|"

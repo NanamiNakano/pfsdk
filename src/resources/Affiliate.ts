@@ -1,5 +1,6 @@
-import { AffiliateDataResponse, AffiliateBalanceLogResponse, BasicResponse, QueryParams } from "../types"
-import { AxiosError, AxiosInstance } from "axios"
+import type { AxiosInstance } from "axios"
+import { AxiosError } from "axios"
+import type { AffiliateBalanceLogResponse, AffiliateDataResponse, BasicResponse, QueryParams } from "../types"
 
 export class Affiliate {
   private axiosInstance: AxiosInstance
@@ -23,16 +24,17 @@ export class Affiliate {
     try {
       if (query) {
         const response = await this.axiosInstance.get("/affiliate/balance/logs", {
-          params: query
+          params: query,
         })
         return response.data as AffiliateBalanceLogResponse
       }
       const response = await this.axiosInstance.get("/affiliate/balance/logs")
       return response.data as AffiliateBalanceLogResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data as BasicResponse
-      }
+
       console.log(error)
       return { Ok: false }
     }
@@ -47,14 +49,15 @@ export class Affiliate {
       if (response.data.Data === null) {
         return {
           Msg: "邀请系统未激活",
-          Ok: false
+          Ok: false,
         }
       }
       return response.data as AffiliateDataResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data as BasicResponse
-      }
+
       console.log(error)
       return { Ok: false }
     }
@@ -67,10 +70,11 @@ export class Affiliate {
     try {
       const response = await this.axiosInstance.post("/affiliate")
       return response.data
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data as BasicResponse
-      }
+
       console.log(error)
       return { Ok: false }
     }
@@ -87,10 +91,11 @@ export class Affiliate {
     try {
       const response = await this.axiosInstance.put("/affiliate/payout", params)
       return response.data
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data as BasicResponse
-      }
+
       console.log(error)
       return { Ok: false }
     }

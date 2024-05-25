@@ -1,11 +1,12 @@
-import { AxiosError, AxiosInstance } from "axios"
-import {
+import type { AxiosInstance } from "axios"
+import { AxiosError } from "axios"
+import type {
   AffiliationResponse,
   BalanceLogResponse,
   BasicResponse,
   QueryParams,
   ResetTokenResponse,
-  UserDataResponse
+  UserDataResponse,
 } from "../types"
 
 export class User {
@@ -30,16 +31,17 @@ export class User {
     try {
       if (query) {
         const response = await this.axiosInstance.get("/user/balance/logs", {
-          params: query
+          params: query,
         })
         return response.data as BalanceLogResponse
       }
       const response = await this.axiosInstance.get("/user/balance/logs")
       return response.data as BalanceLogResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data as BasicResponse
-      }
+
       console.log(error)
       return { Ok: false }
     }
@@ -60,16 +62,17 @@ export class User {
     try {
       if (query) {
         const response = await this.axiosInstance.get("/user/affiliate", {
-          params: query
+          params: query,
         })
         return response.data as AffiliationResponse
       }
       const response = await this.axiosInstance.get("/user/affiliate")
       return response.data as AffiliationResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data as BasicResponse
-      }
+
       console.log(error)
       return { Ok: false }
     }
@@ -82,10 +85,11 @@ export class User {
     try {
       const response = await this.axiosInstance.get("/user")
       return response.data as UserDataResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data as BasicResponse
-      }
+
       console.log(error)
       return { Ok: false }
     }
@@ -101,10 +105,11 @@ export class User {
     try {
       const response = await this.axiosInstance.put("/user/changeName", params)
       return response.data as BasicResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data as BasicResponse
-      }
+
       console.log(error)
       return { Ok: false }
     }
@@ -123,10 +128,11 @@ export class User {
     try {
       const response = await this.axiosInstance.put("/user/changePassword", params)
       return response.data as BasicResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data as BasicResponse
-      }
+
       console.log(error)
       return { Ok: false }
     }
@@ -139,10 +145,11 @@ export class User {
     try {
       const response = await this.axiosInstance.put("/user/resetToken")
       return response.data as ResetTokenResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data as BasicResponse
-      }
+
       console.log(error)
       return { Ok: false }
     }
@@ -159,10 +166,11 @@ export class User {
     try {
       const response = await this.axiosInstance.put("/user/cdkey", params)
       return response.data as BasicResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data as BasicResponse
-      }
+
       console.log(error)
       return { Ok: false }
     }

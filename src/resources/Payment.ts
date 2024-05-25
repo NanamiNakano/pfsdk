@@ -1,5 +1,6 @@
-import { AxiosError, AxiosInstance } from "axios"
-import { PaymentGatewayListResponse, PayResponse, TopUpResponse } from "../types"
+import type { AxiosInstance } from "axios"
+import { AxiosError } from "axios"
+import type { PayResponse, PaymentGatewayListResponse, TopUpResponse } from "../types"
 
 export class Payment {
   private axiosInstance: AxiosInstance
@@ -19,10 +20,11 @@ export class Payment {
     try {
       const response = await this.axiosInstance.post("/pay", params)
       return response.data as TopUpResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data
-      }
+
       console.log(error)
       return { Ok: false }
     }
@@ -35,12 +37,13 @@ export class Payment {
    */
   async pay(gatewayId: number, invoiceId: number): Promise<PayResponse> {
     try {
-      const response = await this.axiosInstance.get(`/pay/${ gatewayId }?id=${ invoiceId }`)
+      const response = await this.axiosInstance.get(`/pay/${gatewayId}?id=${invoiceId}`)
       return response.data as PayResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data
-      }
+
       console.log(error)
       return { Ok: false }
     }
@@ -53,10 +56,11 @@ export class Payment {
     try {
       const response = await this.axiosInstance.get("/gateways")
       return response.data as PaymentGatewayListResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data
-      }
+
       console.log(error)
       return { Ok: false }
     }

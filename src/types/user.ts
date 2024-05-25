@@ -1,6 +1,6 @@
-import { BasicResponse, Config } from "./common"
+import type { BasicResponse, Config } from "./common"
 
-export type UserData = {
+export interface UserData {
   id: number
   username: string
   name: string
@@ -39,7 +39,7 @@ export type UserDataListResponse = BasicResponse & {
   Count?: number
 }
 
-export type BalanceLog = {
+export interface BalanceLog {
   id: number
   user_id: number
   type: string
@@ -55,7 +55,7 @@ export type BalanceLogResponse = BasicResponse & {
   Count?: number
 }
 
-export type AffiliationData = {
+export interface AffiliationData {
   id: number
   user_id: number
   invite_user_id: number

@@ -1,4 +1,4 @@
-import { AxiosInstance } from "axios"
+import type { AxiosInstance } from "axios"
 
 export class AdminSystem {
   private axiosInstance: AxiosInstance
@@ -6,6 +6,4 @@ export class AdminSystem {
   constructor(axiosInstance: AxiosInstance) {
     this.axiosInstance = axiosInstance
   }
-
-
 }

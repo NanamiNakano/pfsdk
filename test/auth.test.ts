@@ -1,5 +1,5 @@
-import { PfClient } from "../src/client"
 import { describe, expect, test } from "@jest/globals"
+import { PfClient } from "../src/client"
 
 const endpoint = "dev.zeroteam.top"
 
@@ -23,8 +23,9 @@ describe("Auth module", () => {
 
   test("Register", async () => {
     const result = await client.auth.register(
-        (Math.random() + 2).toString(36).substring(7),
-        (Math.random() + 2).toString(36).substring(7))
+      (Math.random() + 2).toString(36).substring(7),
+      (Math.random() + 2).toString(36).substring(7),
+    )
     expect(result.Ok).toBeTruthy()
   })
 

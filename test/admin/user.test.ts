@@ -1,21 +1,21 @@
-import { PfClient } from "../../src/client"
 import { beforeAll, describe, expect, test } from "@jest/globals"
-import { PendingUserData, QueryParams } from "../../src/types"
+import { PfClient } from "../../src/client"
+import type { PendingUserData, QueryParams } from "../../src/types"
 
 const endpoint = "dev.zeroteam.top"
 
 const client = new PfClient(endpoint)
 const query = {
-  limit: 1
+  limit: 1,
 } as QueryParams
 
 const pendingUser = {
   username: (Math.random() + 2).toString(36).substring(7),
-  name: 'Test User',
+  name: "Test User",
   plan_id: 1,
   permission_id: 1,
-  reset_date: '0001-01-01',
-  expire_date: '0001-01-01',
+  reset_date: "0001-01-01",
+  expire_date: "0001-01-01",
   auto_renew: true,
   rule: 1,
   nat_rule: 1,
@@ -36,9 +36,9 @@ const pendingUser = {
   price: 0,
   period: 0,
   permission: 1,
-  token: 'zatCRUBcles6XqR4pzJb',
-  last_active: '0001-01-01 00:00:00',
-  registration_date: '2024-05-21 20:09:01'
+  token: "zatCRUBcles6XqR4pzJb",
+  last_active: "0001-01-01 00:00:00",
+  registration_date: "2024-05-21 20:09:01",
 } as PendingUserData
 
 let toBeDeleted = -1

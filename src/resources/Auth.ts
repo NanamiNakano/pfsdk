@@ -1,5 +1,6 @@
-import { BasicResponse, ThirdAuthListResponse, ThirdAuthResponse } from "../types"
-import { AxiosError, AxiosInstance } from "axios"
+import type { AxiosInstance } from "axios"
+import { AxiosError } from "axios"
+import type { BasicResponse, ThirdAuthListResponse, ThirdAuthResponse } from "../types"
 
 export class Auth {
   private axiosInstance: AxiosInstance
@@ -21,10 +22,11 @@ export class Auth {
     try {
       const response = await this.axiosInstance.post("/login", params)
       return response.data as BasicResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data as BasicResponse
-      }
+
       console.log(error)
       return { Ok: false }
     }
@@ -38,10 +40,11 @@ export class Auth {
     try {
       const response = await this.axiosInstance.get("/auth")
       return response.data as ThirdAuthListResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data as BasicResponse
-      }
+
       console.log(error)
       return { Ok: false }
     }
@@ -54,12 +57,13 @@ export class Auth {
    */
   async getAuth(id: number): Promise<ThirdAuthResponse> {
     try {
-      const response = await this.axiosInstance.get(`/auth/${ id }`)
+      const response = await this.axiosInstance.get(`/auth/${id}`)
       return response.data as ThirdAuthResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data as BasicResponse
-      }
+
       console.log(error)
       return { Ok: false }
     }
@@ -76,20 +80,20 @@ export class Auth {
     const params = new URLSearchParams()
     params.append("username", username)
     params.append("password", password)
-    if (recaptcha) {
+    if (recaptcha)
       params.append("recaptcha", recaptcha)
-    }
-    if (invite_code) {
+
+    if (invite_code)
       params.append("invite_code", invite_code)
-    }
 
     try {
       const response = await this.axiosInstance.post("/register", params)
       return response.data as BasicResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data as BasicResponse
-      }
+
       console.log(error)
       return { Ok: false }
     }
@@ -102,10 +106,11 @@ export class Auth {
     try {
       const response = await this.axiosInstance.get("/logout")
       return response.data as BasicResponse
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
+    }
+    catch (error) {
+      if (error instanceof AxiosError && error.response)
         return error.response.data as BasicResponse
-      }
+
       console.log(error)
       return { Ok: false }
     }

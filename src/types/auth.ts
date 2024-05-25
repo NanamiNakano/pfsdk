@@ -1,7 +1,7 @@
-import { BasicResponse } from "./common"
+import type { BasicResponse } from "./common"
 
-export type ThirdAuth = {
-  id: number,
+export interface ThirdAuth {
+  id: number
   name: string
 }
 

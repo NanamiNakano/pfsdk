@@ -1,5 +1,5 @@
-import { PfClient } from "../src/client"
 import { beforeAll, describe, expect, test } from "@jest/globals"
+import { PfClient } from "../src/client"
 
 const endpoint = "dev.zeroteam.top"
 

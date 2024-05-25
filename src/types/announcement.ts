@@ -1,6 +1,6 @@
-import { BasicResponse } from "./common"
+import type { BasicResponse } from "./common"
 
-export type AnnouncementData = {
+export interface AnnouncementData {
   id: number
   title: string
   content: string

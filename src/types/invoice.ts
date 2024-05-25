@@ -1,6 +1,6 @@
-import { BasicResponse } from "./common"
+import type { BasicResponse } from "./common"
 
-export type InvoiceData = {
+export interface InvoiceData {
   id: number
   user_id: number
   amount: number

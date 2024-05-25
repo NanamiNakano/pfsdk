@@ -1,4 +1,4 @@
-import { BasicResponse } from "./common"
+import type { BasicResponse } from "./common"
 
 export type TopUpResponse = BasicResponse & {
   invoice_id?: string
@@ -9,7 +9,7 @@ export type PayResponse = BasicResponse & {
   QrCode?: string
 }
 
-export type PaymentGateway = {
+export interface PaymentGateway {
   id: number
   name: string
   fee: number

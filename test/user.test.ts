@@ -1,6 +1,6 @@
-import { PfClient } from "../src/client"
 import { afterAll, beforeAll, describe, expect, test } from "@jest/globals"
-import { QueryParams } from "../src/types"
+import { PfClient } from "../src/client"
+import type { QueryParams } from "../src/types"
 
 const endpoint = "dev.zeroteam.top"
 
@@ -40,22 +40,20 @@ describe("User module", () => {
   })
 
   test("Change user's password", async () => {
-    const result = await client.user.changePassword(password,
-        (Math.random() + 2).toString(36).substring(7))
+    const result = await client.user.changePassword(password, (Math.random() + 2).toString(36).substring(7))
     expect(result.Ok).toBeTruthy()
   })
 
-  //TODO: Redeem CDKey Test
+  // TODO: Redeem CDKey Test
 })
 
 afterAll(async () => {
   await client.auth.login("admin", "admin")
   const query = {
     filter: "username",
-    search: username
+    search: username,
   } as QueryParams
   const result = await client.admin.user.getAll(query)
-  if (result.Data) {
+  if (result.Data)
     await client.admin.user.delete(result.Data[0].id)
-  }
 })

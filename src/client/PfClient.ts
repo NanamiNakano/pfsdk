@@ -1,7 +1,8 @@
-import { Admin, Affiliate, Announcement, Auth, Invoice, Node, Payment, Plan, System, User } from "../resources"
-import axios, { AxiosInstance } from "axios"
+import type { AxiosInstance } from "axios"
+import axios from "axios"
 import { wrapper } from "axios-cookiejar-support"
 import { CookieJar } from "tough-cookie"
+import { Admin, Affiliate, Announcement, Auth, Invoice, Node, Payment, Plan, System, User } from "../resources"
 
 export class PfClient {
   public admin: Admin
@@ -21,13 +22,14 @@ export class PfClient {
       const jar = new CookieJar()
       this.axiosInstance = wrapper(axios.create({
         jar,
-        baseURL: `https://${ endpoint }/ajax`,
-        withCredentials: true
+        baseURL: `https://${endpoint}/ajax`,
+        withCredentials: true,
       }))
-    } else {
+    }
+    else {
       this.axiosInstance = axios.create({
-        baseURL: `https://${ endpoint }/ajax`,
-        withCredentials: true
+        baseURL: `https://${endpoint}/ajax`,
+        withCredentials: true,
       })
     }
     this.admin = new Admin(this.axiosInstance)
