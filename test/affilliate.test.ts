@@ -21,11 +21,11 @@ describe("Affiliate module", () => {
 
   test("Active affiliate system", async () => {
     const result = await client.affiliate.active()
-    expect(result.Ok || !result.Ok && result.Msg === "您已激活邀请系统").toBeTruthy()
+    expect(result.Ok || (!result.Ok && result.Msg === "您已激活邀请系统")).toBeTruthy()
   })
 
   test("Get data of affiliate system", async () => {
     const result = await client.affiliate.getData()
-    expect(result.Ok || !result.Ok && result.Msg === "邀请系统未激活").toBeTruthy()
+    expect(result.Ok || (!result.Ok && result.Msg === "邀请系统未激活")).toBeTruthy()
   })
 })

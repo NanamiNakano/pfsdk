@@ -1,5 +1,5 @@
 import type { AxiosInstance } from "axios"
-import { AxiosError } from "axios"
+import axios from "axios"
 import type { InvoiceDataResponse, InvoiceListResponse, QueryParams } from "../types"
 
 export class Invoice {
@@ -32,11 +32,10 @@ export class Invoice {
       return response.data as InvoiceListResponse
     }
     catch (error) {
-      if (error instanceof AxiosError && error.response)
+      if (axios.isAxiosError(error) && error.response)
         return error.response.data
 
-      console.log(error)
-      return { Ok: false }
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 
@@ -50,11 +49,10 @@ export class Invoice {
       return response.data as InvoiceDataResponse
     }
     catch (error) {
-      if (error instanceof AxiosError && error.response)
+      if (axios.isAxiosError(error) && error.response)
         return error.response.data
 
-      console.log(error)
-      return { Ok: false }
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 }

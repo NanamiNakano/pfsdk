@@ -1,5 +1,5 @@
 import type { AxiosInstance } from "axios"
-import { AxiosError } from "axios"
+import axios from "axios"
 import type { AffiliateBalanceLogResponse, AffiliateDataResponse, BasicResponse, QueryParams } from "../types"
 
 export class Affiliate {
@@ -32,11 +32,10 @@ export class Affiliate {
       return response.data as AffiliateBalanceLogResponse
     }
     catch (error) {
-      if (error instanceof AxiosError && error.response)
+      if (axios.isAxiosError(error) && error.response)
         return error.response.data as BasicResponse
 
-      console.log(error)
-      return { Ok: false }
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 
@@ -55,11 +54,10 @@ export class Affiliate {
       return response.data as AffiliateDataResponse
     }
     catch (error) {
-      if (error instanceof AxiosError && error.response)
+      if (axios.isAxiosError(error) && error.response)
         return error.response.data as BasicResponse
 
-      console.log(error)
-      return { Ok: false }
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 
@@ -72,11 +70,10 @@ export class Affiliate {
       return response.data
     }
     catch (error) {
-      if (error instanceof AxiosError && error.response)
+      if (axios.isAxiosError(error) && error.response)
         return error.response.data as BasicResponse
 
-      console.log(error)
-      return { Ok: false }
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 
@@ -93,11 +90,10 @@ export class Affiliate {
       return response.data
     }
     catch (error) {
-      if (error instanceof AxiosError && error.response)
+      if (axios.isAxiosError(error) && error.response)
         return error.response.data as BasicResponse
 
-      console.log(error)
-      return { Ok: false }
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 }

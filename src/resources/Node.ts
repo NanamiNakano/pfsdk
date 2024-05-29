@@ -1,5 +1,5 @@
 import type { AxiosInstance } from "axios"
-import { AxiosError } from "axios"
+import axios from "axios"
 import type {
   NatNodeDataResponse,
   NatNodeListResponse,
@@ -39,11 +39,10 @@ export class Node {
       return response.data as NodeListResponse
     }
     catch (error) {
-      if (error instanceof AxiosError && error.response)
+      if (axios.isAxiosError(error) && error.response)
         return error.response.data
 
-      console.log(error)
-      return { Ok: false }
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 
@@ -57,11 +56,10 @@ export class Node {
       return response.data as NodeDataResponse
     }
     catch (error) {
-      if (error instanceof AxiosError && error.response)
+      if (axios.isAxiosError(error) && error.response)
         return error.response.data
 
-      console.log(error)
-      return { Ok: false }
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 
@@ -74,11 +72,10 @@ export class Node {
       return response.data
     }
     catch (error) {
-      if (error instanceof AxiosError && error.response)
+      if (axios.isAxiosError(error) && error.response)
         return error.response.data
 
-      console.log(error)
-      return { Ok: false }
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 
@@ -105,11 +102,10 @@ export class Node {
       return response.data as NatNodeListResponse
     }
     catch (error) {
-      if (error instanceof AxiosError && error.response)
+      if (axios.isAxiosError(error) && error.response)
         return error.response.data
 
-      console.log(error)
-      return { Ok: false }
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 
@@ -123,11 +119,10 @@ export class Node {
       return response.data as NatNodeDataResponse
     }
     catch (error) {
-      if (error instanceof AxiosError && error.response)
+      if (axios.isAxiosError(error) && error.response)
         return error.response.data
 
-      console.log(error)
-      return { Ok: false }
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 }

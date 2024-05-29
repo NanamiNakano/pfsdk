@@ -1,5 +1,5 @@
 import type { AxiosInstance } from "axios"
-import { AxiosError } from "axios"
+import axios from "axios"
 import type { PayResponse, PaymentGatewayListResponse, TopUpResponse } from "../types"
 
 export class Payment {
@@ -22,11 +22,10 @@ export class Payment {
       return response.data as TopUpResponse
     }
     catch (error) {
-      if (error instanceof AxiosError && error.response)
+      if (axios.isAxiosError(error) && error.response)
         return error.response.data
 
-      console.log(error)
-      return { Ok: false }
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 
@@ -41,11 +40,10 @@ export class Payment {
       return response.data as PayResponse
     }
     catch (error) {
-      if (error instanceof AxiosError && error.response)
+      if (axios.isAxiosError(error) && error.response)
         return error.response.data
 
-      console.log(error)
-      return { Ok: false }
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 
@@ -58,11 +56,10 @@ export class Payment {
       return response.data as PaymentGatewayListResponse
     }
     catch (error) {
-      if (error instanceof AxiosError && error.response)
+      if (axios.isAxiosError(error) && error.response)
         return error.response.data
 
-      console.log(error)
-      return { Ok: false }
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 }

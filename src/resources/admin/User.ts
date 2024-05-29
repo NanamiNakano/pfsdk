@@ -1,5 +1,5 @@
 import type { AxiosInstance } from "axios"
-import { AxiosError } from "axios"
+import axios from "axios"
 import type {
   AddUserResponse,
   AffiliationResponse,
@@ -38,11 +38,10 @@ export class AdminUser {
       return response.data as BalanceLogResponse
     }
     catch (error) {
-      if (error instanceof AxiosError && error.response)
+      if (axios.isAxiosError(error) && error.response)
         return error.response.data as BalanceLogResponse
 
-      console.log(error)
-      return { Ok: false }
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 
@@ -56,11 +55,10 @@ export class AdminUser {
       return response.data as BasicResponse
     }
     catch (error) {
-      if (error instanceof AxiosError && error.response)
+      if (axios.isAxiosError(error) && error.response)
         return error.response.data as BasicResponse
 
-      console.log(error)
-      return { Ok: false }
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 
@@ -83,11 +81,10 @@ export class AdminUser {
       return response.data as AffiliationResponse
     }
     catch (error) {
-      if (error instanceof AxiosError && error.response)
+      if (axios.isAxiosError(error) && error.response)
         return error.response.data as BasicResponse
 
-      console.log(error)
-      return { Ok: false }
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 
@@ -107,11 +104,10 @@ export class AdminUser {
       return response.data as UserDataListResponse
     }
     catch (error) {
-      if (error instanceof AxiosError && error.response)
+      if (axios.isAxiosError(error) && error.response)
         return error.response.data as BasicResponse
 
-      console.log(error)
-      return { Ok: false }
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 
@@ -125,11 +121,10 @@ export class AdminUser {
       return response.data as UserDataResponse
     }
     catch (error) {
-      if (error instanceof AxiosError && error.response)
+      if (axios.isAxiosError(error) && error.response)
         return error.response.data as BasicResponse
 
-      console.log(error)
-      return { Ok: false }
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 
@@ -143,11 +138,10 @@ export class AdminUser {
       return response.data as AddUserResponse
     }
     catch (error) {
-      if (error instanceof AxiosError && error.response)
+      if (axios.isAxiosError(error) && error.response)
         return error.response.data as AddUserResponse
 
-      console.log(error)
-      return { Ok: false }
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 
@@ -162,11 +156,10 @@ export class AdminUser {
       return response.data as BasicResponse
     }
     catch (error) {
-      if (error instanceof AxiosError && error.response)
+      if (axios.isAxiosError(error) && error.response)
         return error.response.data as BasicResponse
 
-      console.log(error)
-      return { Ok: false }
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 
@@ -180,11 +173,10 @@ export class AdminUser {
       return response.data as BasicResponse
     }
     catch (error) {
-      if (error instanceof AxiosError && error.response)
+      if (axios.isAxiosError(error) && error.response)
         return error.response.data as BasicResponse
 
-      console.log(error)
-      return { Ok: false }
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 
@@ -201,11 +193,10 @@ export class AdminUser {
       return response.data as BasicResponse
     }
     catch (error) {
-      if (error instanceof AxiosError && error.response)
+      if (axios.isAxiosError(error) && error.response)
         return error.response.data as BasicResponse
 
-      console.log(error)
-      return { Ok: false }
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 }

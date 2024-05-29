@@ -26,7 +26,7 @@ describe("Plan module", () => {
 
   test("Renew current plan", async () => {
     const result = await client.plan.renew()
-    expect(result.Ok || !result.Ok && result.Msg === "无需续订").toBeTruthy()
+    expect(result.Ok || (!result.Ok && result.Msg === "无需续订")).toBeTruthy()
   })
 
   test("Reset traffic of current plan", async () => {

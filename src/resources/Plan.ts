@@ -1,5 +1,5 @@
 import type { AxiosInstance } from "axios"
-import { AxiosError } from "axios"
+import axios from "axios"
 import type { BasicResponse, CurrentPlanResponse, PlanListResponse } from "../types"
 
 export class Plan {
@@ -18,11 +18,10 @@ export class Plan {
       return response.data as PlanListResponse
     }
     catch (error) {
-      if (error instanceof AxiosError && error.response)
+      if (axios.isAxiosError(error) && error.response)
         return error.response.data as BasicResponse
 
-      console.log(error)
-      return { Ok: false }
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 
@@ -35,11 +34,10 @@ export class Plan {
       return response.data as CurrentPlanResponse
     }
     catch (error) {
-      if (error instanceof AxiosError && error.response)
+      if (axios.isAxiosError(error) && error.response)
         return error.response.data as BasicResponse
 
-      console.log(error)
-      return { Ok: false }
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 
@@ -56,11 +54,10 @@ export class Plan {
       return response.data as BasicResponse
     }
     catch (error) {
-      if (error instanceof AxiosError && error.response)
+      if (axios.isAxiosError(error) && error.response)
         return error.response.data as BasicResponse
 
-      console.log(error)
-      return { Ok: false }
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 
@@ -73,14 +70,14 @@ export class Plan {
       return response.data as BasicResponse
     }
     catch (error) {
-      if (error instanceof AxiosError && error.response) {
+      if (axios.isAxiosError(error) && error.response) {
         if (error.response.status === 304)
           return { Msg: "无需续订", Ok: false }
 
         return error.response.data as BasicResponse
       }
-      console.log(error)
-      return { Ok: false }
+
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 
@@ -93,11 +90,10 @@ export class Plan {
       return response.data as BasicResponse
     }
     catch (error) {
-      if (error instanceof AxiosError && error.response)
+      if (axios.isAxiosError(error) && error.response)
         return error.response.data as BasicResponse
 
-      console.log(error)
-      return { Ok: false }
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 
@@ -110,11 +106,10 @@ export class Plan {
       return response.data as BasicResponse
     }
     catch (error) {
-      if (error instanceof AxiosError && error.response)
+      if (axios.isAxiosError(error) && error.response)
         return error.response.data as BasicResponse
 
-      console.log(error)
-      return { Ok: false }
+      return { Msg: "Unexpected error", Ok: false }
     }
   }
 }
