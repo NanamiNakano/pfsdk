@@ -2,7 +2,7 @@ import type { AxiosInstance } from "axios"
 import axios from "axios"
 import { wrapper } from "axios-cookiejar-support"
 import { CookieJar } from "tough-cookie"
-import { Admin, Affiliate, Announcement, Auth, Invoice, Node, Payment, Plan, System, User } from "../resources"
+import { Admin, Affiliate, Announcement, Auth, Invoice, Node, Payment, Plan, Rule, System, User } from "../resources"
 
 export class PfClient {
   public admin: Admin
@@ -12,6 +12,8 @@ export class PfClient {
   public plan: Plan
   public node: Node
   public user: User
+  public forwardRule: Rule
+  public natRule: Rule
   public invoice: Invoice
   public payment: Payment
   public system: System
@@ -39,6 +41,8 @@ export class PfClient {
     this.plan = new Plan(this.axiosInstance)
     this.node = new Node(this.axiosInstance)
     this.user = new User(this.axiosInstance)
+    this.forwardRule = new Rule(this.axiosInstance, false)
+    this.natRule = new Rule(this.axiosInstance, true)
     this.invoice = new Invoice(this.axiosInstance)
     this.payment = new Payment(this.axiosInstance)
     this.system = new System(this.axiosInstance)
