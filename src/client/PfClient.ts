@@ -58,7 +58,7 @@ export class PfClient {
     this.forwardRule = new Rule(this.axiosInstance, false, false)
     this.natRule = new Rule(this.axiosInstance, true, false)
     this.device = new Device(this.axiosInstance, false)
-    this.invoice = new Invoice(this.axiosInstance)
+    this.invoice = new Invoice(this.axiosInstance, false)
     this.payment = new Payment(this.axiosInstance)
     this.system = new System(this.axiosInstance)
   }

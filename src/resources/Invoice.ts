@@ -3,10 +3,12 @@ import axios from "axios"
 import type { InvoiceDataResponse, InvoiceListResponse, QueryParams } from "../types"
 
 export class Invoice {
-  private axiosInstance: AxiosInstance
+  protected axiosInstance: AxiosInstance
+  private readonly endpoint: string
 
-  constructor(axiosInstance: AxiosInstance) {
+  constructor(axiosInstance: AxiosInstance, admin: boolean) {
     this.axiosInstance = axiosInstance
+    this.endpoint = admin ? "/admin" : ""
   }
 
   /**
@@ -23,12 +25,12 @@ export class Invoice {
   async getInvoices(query?: QueryParams): Promise<InvoiceListResponse> {
     try {
       if (query) {
-        const response = await this.axiosInstance.get("/invoice", {
+        const response = await this.axiosInstance.get(`${this.endpoint}/invoice`, {
           params: query,
         })
         return response.data as InvoiceListResponse
       }
-      const response = await this.axiosInstance.get("/invoice")
+      const response = await this.axiosInstance.get(`${this.endpoint}/invoice`)
       return response.data as InvoiceListResponse
     }
     catch (error) {
@@ -45,7 +47,7 @@ export class Invoice {
    */
   async getInvoice(id: number): Promise<InvoiceDataResponse> {
     try {
-      const response = await this.axiosInstance.get(`/invoice?id=${id}`)
+      const response = await this.axiosInstance.get(`${this.endpoint}/invoice?id=${id}`)
       return response.data as InvoiceDataResponse
     }
     catch (error) {
