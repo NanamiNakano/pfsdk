@@ -1,10 +1,10 @@
-import { BasicResponse } from "./common";
-export type AnnouncementData = {
+import type { BasicResponse } from "./common";
+export interface AnnouncementData {
     id: number;
     title: string;
     content: string;
     edit_at: string;
-};
+}
 export type AnnouncementListResponse = BasicResponse & {
     Data?: AnnouncementData[];
     Count?: number;

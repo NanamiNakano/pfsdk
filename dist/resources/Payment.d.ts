@@ -1,5 +1,5 @@
-import { AxiosInstance } from "axios";
-import { PaymentGatewayListResponse, PayResponse, TopUpResponse } from "../types";
+import type { AxiosInstance } from "axios";
+import type { PayResponse, PaymentGatewayListResponse, TopUpResponse } from "../types";
 export declare class Payment {
     private axiosInstance;
     constructor(axiosInstance: AxiosInstance);

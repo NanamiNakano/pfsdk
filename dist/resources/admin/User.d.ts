@@ -1,5 +1,5 @@
-import { AxiosInstance } from "axios";
-import { AffiliationResponse, BalanceLogResponse, BasicResponse, PendingUserData, QueryParams, UserDataListResponse, UserDataResponse } from "../../types";
+import type { AxiosInstance } from "axios";
+import type { AddUserResponse, AffiliationResponse, BalanceLogResponse, BasicResponse, PendingUserData, QueryParams, UserDataListResponse, UserDataResponse } from "../../types";
 export declare class AdminUser {
     private axiosInstance;
     constructor(axiosInstance: AxiosInstance);
@@ -34,7 +34,7 @@ export declare class AdminUser {
      * Add a user
      * @param user
      */
-    add(user: PendingUserData): Promise<BasicResponse>;
+    add(user: PendingUserData): Promise<AddUserResponse>;
     /**
      * modify a user
      * @param userId

@@ -1,5 +1,5 @@
-import { BasicResponse, Config } from "./common";
-export type UserData = {
+import type { BasicResponse, Config } from "./common";
+export interface UserData {
     id: number;
     username: string;
     name: string;
@@ -25,7 +25,7 @@ export type UserData = {
     permission: number;
     token: string;
     registration_date: string;
-};
+}
 export type PendingUserData = Omit<UserData, "id">;
 export type UserDataResponse = BasicResponse & {
     Data?: UserData;
@@ -34,7 +34,7 @@ export type UserDataListResponse = BasicResponse & {
     Data?: UserData[];
     Count?: number;
 };
-export type BalanceLog = {
+export interface BalanceLog {
     id: number;
     user_id: number;
     type: string;
@@ -43,22 +43,25 @@ export type BalanceLog = {
     new_value: number;
     note: string;
     created_at: string;
-};
+}
 export type BalanceLogResponse = BasicResponse & {
     Data?: BalanceLog[];
     Count?: number;
 };
-export type AffiliationData = {
+export interface AffiliationData {
     id: number;
     user_id: number;
     invite_user_id: number;
     first_charged: boolean;
     created_at: string;
-};
+}
 export type AffiliationResponse = BasicResponse & {
     Data?: AffiliationData[];
     Count?: number;
 };
 export type ResetTokenResponse = BasicResponse & {
     Token?: string;
+};
+export type AddUserResponse = BasicResponse & {
+    ID?: number;
 };

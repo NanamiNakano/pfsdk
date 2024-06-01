@@ -8,9 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Auth = void 0;
-const axios_1 = require("axios");
+const axios_1 = __importDefault(require("axios"));
 class Auth {
     constructor(axiosInstance) {
         this.axiosInstance = axiosInstance;
@@ -30,11 +33,9 @@ class Auth {
                 return response.data;
             }
             catch (error) {
-                if (error instanceof axios_1.AxiosError && error.response) {
+                if (axios_1.default.isAxiosError(error) && error.response)
                     return error.response.data;
-                }
-                console.log(error);
-                return { Ok: false };
+                return { Msg: "Unexpected error", Ok: false };
             }
         });
     }
@@ -49,11 +50,9 @@ class Auth {
                 return response.data;
             }
             catch (error) {
-                if (error instanceof axios_1.AxiosError && error.response) {
+                if (axios_1.default.isAxiosError(error) && error.response)
                     return error.response.data;
-                }
-                console.log(error);
-                return { Ok: false };
+                return { Msg: "Unexpected error", Ok: false };
             }
         });
     }
@@ -69,11 +68,9 @@ class Auth {
                 return response.data;
             }
             catch (error) {
-                if (error instanceof axios_1.AxiosError && error.response) {
+                if (axios_1.default.isAxiosError(error) && error.response)
                     return error.response.data;
-                }
-                console.log(error);
-                return { Ok: false };
+                return { Msg: "Unexpected error", Ok: false };
             }
         });
     }
@@ -89,22 +86,18 @@ class Auth {
             const params = new URLSearchParams();
             params.append("username", username);
             params.append("password", password);
-            if (recaptcha) {
+            if (recaptcha)
                 params.append("recaptcha", recaptcha);
-            }
-            if (invite_code) {
+            if (invite_code)
                 params.append("invite_code", invite_code);
-            }
             try {
                 const response = yield this.axiosInstance.post("/register", params);
                 return response.data;
             }
             catch (error) {
-                if (error instanceof axios_1.AxiosError && error.response) {
+                if (axios_1.default.isAxiosError(error) && error.response)
                     return error.response.data;
-                }
-                console.log(error);
-                return { Ok: false };
+                return { Msg: "Unexpected error", Ok: false };
             }
         });
     }
@@ -118,11 +111,9 @@ class Auth {
                 return response.data;
             }
             catch (error) {
-                if (error instanceof axios_1.AxiosError && error.response) {
+                if (axios_1.default.isAxiosError(error) && error.response)
                     return error.response.data;
-                }
-                console.log(error);
-                return { Ok: false };
+                return { Msg: "Unexpected error", Ok: false };
             }
         });
     }

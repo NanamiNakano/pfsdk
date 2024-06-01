@@ -1,5 +1,5 @@
-import { BasicResponse } from "./common";
-export type NodeData = {
+import type { BasicResponse } from "./common";
+export interface NodeData {
     id: number;
     name: string;
     addr: string;
@@ -30,7 +30,7 @@ export type NodeData = {
     note: string;
     updated: string;
     permission: number;
-};
+}
 export type NodeListResponse = BasicResponse & {
     Data?: NodeData[];
     Count?: number;
@@ -38,9 +38,9 @@ export type NodeListResponse = BasicResponse & {
 export type NodeDataResponse = BasicResponse & {
     Data?: NodeData;
 };
-export type NodeSessionData = {
+export interface NodeSessionData {
     [key: string | number]: string[];
-};
+}
 export type NodeSessionResponse = BasicResponse & {
     Data?: NodeSessionData;
 };

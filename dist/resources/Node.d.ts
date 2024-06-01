@@ -1,5 +1,5 @@
-import { NatNodeDataResponse, NatNodeListResponse, NodeDataResponse, NodeListResponse, NodeSessionResponse, QueryParams } from "../types";
-import { AxiosInstance } from "axios";
+import type { AxiosInstance } from "axios";
+import type { NatNodeDataResponse, NatNodeListResponse, NodeDataResponse, NodeListResponse, NodeSessionResponse, QueryParams } from "../types";
 export declare class Node {
     private axiosInstance;
     constructor(axiosInstance: AxiosInstance);

@@ -1,5 +1,5 @@
-import { BasicResponse, ThirdAuthListResponse, ThirdAuthResponse } from "../types";
-import { AxiosInstance } from "axios";
+import type { AxiosInstance } from "axios";
+import type { BasicResponse, ThirdAuthListResponse, ThirdAuthResponse } from "../types";
 export declare class Auth {
     private axiosInstance;
     constructor(axiosInstance: AxiosInstance);

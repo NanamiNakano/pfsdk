@@ -8,9 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Plan = void 0;
-const axios_1 = require("axios");
+const axios_1 = __importDefault(require("axios"));
 class Plan {
     constructor(axiosInstance) {
         this.axiosInstance = axiosInstance;
@@ -25,11 +28,9 @@ class Plan {
                 return response.data;
             }
             catch (error) {
-                if (error instanceof axios_1.AxiosError && error.response) {
+                if (axios_1.default.isAxiosError(error) && error.response)
                     return error.response.data;
-                }
-                console.log(error);
-                return { Ok: false };
+                return { Msg: "Unexpected error", Ok: false };
             }
         });
     }
@@ -43,11 +44,9 @@ class Plan {
                 return response.data;
             }
             catch (error) {
-                if (error instanceof axios_1.AxiosError && error.response) {
+                if (axios_1.default.isAxiosError(error) && error.response)
                     return error.response.data;
-                }
-                console.log(error);
-                return { Ok: false };
+                return { Msg: "Unexpected error", Ok: false };
             }
         });
     }
@@ -64,11 +63,9 @@ class Plan {
                 return response.data;
             }
             catch (error) {
-                if (error instanceof axios_1.AxiosError && error.response) {
+                if (axios_1.default.isAxiosError(error) && error.response)
                     return error.response.data;
-                }
-                console.log(error);
-                return { Ok: false };
+                return { Msg: "Unexpected error", Ok: false };
             }
         });
     }
@@ -82,14 +79,12 @@ class Plan {
                 return response.data;
             }
             catch (error) {
-                if (error instanceof axios_1.AxiosError && error.response) {
-                    if (error.response.status === 304) {
+                if (axios_1.default.isAxiosError(error) && error.response) {
+                    if (error.response.status === 304)
                         return { Msg: "无需续订", Ok: false };
-                    }
                     return error.response.data;
                 }
-                console.log(error);
-                return { Ok: false };
+                return { Msg: "Unexpected error", Ok: false };
             }
         });
     }
@@ -103,11 +98,9 @@ class Plan {
                 return response.data;
             }
             catch (error) {
-                if (error instanceof axios_1.AxiosError && error.response) {
+                if (axios_1.default.isAxiosError(error) && error.response)
                     return error.response.data;
-                }
-                console.log(error);
-                return { Ok: false };
+                return { Msg: "Unexpected error", Ok: false };
             }
         });
     }
@@ -121,11 +114,9 @@ class Plan {
                 return response.data;
             }
             catch (error) {
-                if (error instanceof axios_1.AxiosError && error.response) {
+                if (axios_1.default.isAxiosError(error) && error.response)
                     return error.response.data;
-                }
-                console.log(error);
-                return { Ok: false };
+                return { Msg: "Unexpected error", Ok: false };
             }
         });
     }

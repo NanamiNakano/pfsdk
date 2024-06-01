@@ -1,5 +1,5 @@
-import { AffiliateDataResponse, AffiliateBalanceLogResponse, BasicResponse, QueryParams } from "../types";
-import { AxiosInstance } from "axios";
+import type { AxiosInstance } from "axios";
+import type { AffiliateBalanceLogResponse, AffiliateDataResponse, BasicResponse, QueryParams } from "../types";
 export declare class Affiliate {
     private axiosInstance;
     constructor(axiosInstance: AxiosInstance);

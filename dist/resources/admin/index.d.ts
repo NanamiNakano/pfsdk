@@ -1,4 +1,4 @@
-import { AxiosInstance } from "axios";
+import type { AxiosInstance } from "axios";
 import { AdminUser } from "./User";
 export declare class Admin {
     user: AdminUser;

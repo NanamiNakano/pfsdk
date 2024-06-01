@@ -1,7 +1,7 @@
-import { BasicResponse, Config } from "./common";
-import { PermissionGroup } from "./permission";
-import { UserData } from "./user";
-export type PlanData = {
+import type { BasicResponse, Config } from "./common";
+import type { PermissionGroup } from "./permission";
+import type { UserData } from "./user";
+export interface PlanData {
     id: number;
     order: number;
     name: string;
@@ -25,7 +25,7 @@ export type PlanData = {
     price: number;
     period: number;
     note: string;
-};
+}
 export type PlanListResponse = BasicResponse & {
     Permission?: PermissionGroup[];
     Plan?: PlanData[];

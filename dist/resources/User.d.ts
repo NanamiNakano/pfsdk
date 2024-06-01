@@ -1,5 +1,5 @@
-import { AxiosInstance } from "axios";
-import { AffiliationResponse, BalanceLogResponse, BasicResponse, QueryParams, ResetTokenResponse, UserDataResponse } from "../types";
+import type { AxiosInstance } from "axios";
+import type { AffiliationResponse, BalanceLogResponse, BasicResponse, QueryParams, ResetTokenResponse, UserDataResponse } from "../types";
 export declare class User {
     private axiosInstance;
     constructor(axiosInstance: AxiosInstance);

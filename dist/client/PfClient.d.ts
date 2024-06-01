@@ -1,4 +1,4 @@
-import { Admin, Affiliate, Announcement, Auth, Invoice, Node, Payment, Plan, System, User } from "../resources";
+import { Admin, Affiliate, Announcement, Auth, Device, Invoice, Node, Payment, Plan, Rule, System, User } from "../resources";
 export declare class PfClient {
     admin: Admin;
     auth: Auth;
@@ -7,6 +7,9 @@ export declare class PfClient {
     plan: Plan;
     node: Node;
     user: User;
+    forwardRule: Rule;
+    natRule: Rule;
+    device: Device;
     invoice: Invoice;
     payment: Payment;
     system: System;

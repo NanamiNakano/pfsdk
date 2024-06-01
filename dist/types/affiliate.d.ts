@@ -1,5 +1,5 @@
-import { BasicResponse } from "./common";
-export type AffiliateBalanceLog = {
+import type { BasicResponse } from "./common";
+export interface AffiliateBalanceLog {
     id: number;
     user_id: number;
     type: "charge" | "payout";
@@ -8,17 +8,17 @@ export type AffiliateBalanceLog = {
     new_value: number;
     note: string;
     created_at: string;
-};
+}
 export type AffiliateBalanceLogResponse = BasicResponse & {
     Data?: AffiliateBalanceLog[];
     Count?: number;
 };
-export type AffiliateData = {
+export interface AffiliateData {
     user_id: number;
     code: string;
     balance: string;
     created_at: string;
-};
+}
 export type AffiliateDataResponse = BasicResponse & {
     Data?: AffiliateData;
 };

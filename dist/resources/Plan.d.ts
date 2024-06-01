@@ -1,5 +1,5 @@
-import { BasicResponse, CurrentPlanResponse, PlanListResponse } from "../types";
-import { AxiosInstance } from "axios";
+import type { AxiosInstance } from "axios";
+import type { BasicResponse, CurrentPlanResponse, PlanListResponse } from "../types";
 export declare class Plan {
     private axiosInstance;
     constructor(axiosInstance: AxiosInstance);

@@ -1,5 +1,5 @@
-import { AxiosInstance } from "axios";
-import { AnnouncementDataResponse, AnnouncementListResponse, QueryParams } from "../types";
+import type { AxiosInstance } from "axios";
+import type { AnnouncementDataResponse, AnnouncementListResponse, QueryParams } from "../types";
 export declare class Announcement {
     private axiosInstance;
     constructor(axiosInstance: AxiosInstance);

@@ -1,8 +1,8 @@
-import { BasicResponse } from "./common";
-export type ThirdAuth = {
+import type { BasicResponse } from "./common";
+export interface ThirdAuth {
     id: number;
     name: string;
-};
+}
 export type ThirdAuthListResponse = BasicResponse & {
     Data?: ThirdAuth[];
 };

@@ -1,5 +1,5 @@
-import { AxiosInstance } from "axios";
-import { PluginDataResponse, PluginScriptResponse, SystemSettingsResponse } from "../types/system";
+import type { AxiosInstance } from "axios";
+import type { PluginDataResponse, PluginScriptResponse, SystemSettingsResponse } from "../types/system";
 export declare class System {
     private axiosInstance;
     constructor(axiosInstance: AxiosInstance);
