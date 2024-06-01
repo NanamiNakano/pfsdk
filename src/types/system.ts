@@ -14,22 +14,22 @@ export interface SystemSettings {
   invite_reward_for_new_user: string
 }
 
-export interface AdminSystemSettings {
-  version: string
-  site_name: string
-  script_mirror: string
-  pkg_mirror: string
-  register: string
-  register_invite: string
-  register_recaptcha: string
-  recaptcha_public: string
-  invite_reward: string
-  invite_reward_percentage: string
-  invite_reward_for_new_user: string
+export type AdminSystemSettings = SystemSettings & {
+  system_url: string
+  license: string
+  secure_key: string
+  suspend_days: string
+  recaptcha_private: string
 }
+
+export type PendingAdminSystemSettings = AdminSystemSettings
 
 export type SystemSettingsResponse = BasicResponse & {
   Data?: SystemSettings
+}
+
+export type AdminSystemSettingsResponse = BasicResponse & {
+  Data?: SystemSettingsResponse
 }
 
 export interface PluginPageData {
@@ -83,4 +83,8 @@ export interface CDKeyLog {
 export type CDKeyLogResponse = BasicResponse & {
   Data?: CDKeyLog[]
   Count?: number
+}
+
+export type DatabaseBackupResponse = BasicResponse & {
+  Link?: string
 }

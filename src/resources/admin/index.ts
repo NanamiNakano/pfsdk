@@ -8,6 +8,7 @@ import { AdminNode } from "./Node"
 import { AdminDevice } from "./Device"
 import { AdminAnnouncement } from "./Announcement"
 import { AdminInvoice } from "./Invoice"
+import { AdminSystem } from "./system"
 
 export class Admin {
   public affiliate: AdminAffiliate
@@ -20,6 +21,7 @@ export class Admin {
   public device: AdminDevice
   public announcement: AdminAnnouncement
   public invoice: AdminInvoice
+  public system: AdminSystem
 
   constructor(axiosInstance: AxiosInstance) {
     this.affiliate = new AdminAffiliate(axiosInstance)
@@ -32,5 +34,6 @@ export class Admin {
     this.device = new AdminDevice(axiosInstance)
     this.announcement = new AdminAnnouncement(axiosInstance)
     this.invoice = new AdminInvoice(axiosInstance)
+    this.system = new AdminSystem(axiosInstance)
   }
 }
