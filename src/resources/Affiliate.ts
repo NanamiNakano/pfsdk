@@ -87,7 +87,7 @@ export class Affiliate {
 
     try {
       const response = await this.axiosInstance.put("/affiliate/payout", params)
-      return response.data
+      return response.data as BasicResponse
     }
     catch (error) {
       if (axios.isAxiosError(error) && error.response)
