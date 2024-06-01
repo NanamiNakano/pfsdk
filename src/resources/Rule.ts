@@ -11,16 +11,19 @@ import type {
 } from "../types"
 
 export class Rule {
-  private axiosInstance: AxiosInstance
+  axiosInstance: AxiosInstance
   private readonly endpoint: string
 
-  constructor(axiosInstance: AxiosInstance, nat: boolean) {
+  constructor(axiosInstance: AxiosInstance, nat: boolean, admin: boolean) {
     this.axiosInstance = axiosInstance
     if (nat)
       this.endpoint = "/nat_forward_rule"
 
     else
       this.endpoint = "/forward_rule"
+
+    if (admin)
+      this.endpoint = `/admin${this.endpoint}`
   }
 
   /**
