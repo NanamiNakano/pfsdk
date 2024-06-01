@@ -19,19 +19,7 @@ export interface RuleData {
   dest_sync: boolean
 }
 
-export interface PendingRuleData {
-  node_id: number
-  name: string
-  mode: number
-  protocol: string
-  bind: string
-  targets: RuleTarget[]
-  proxy_protocol: number
-  outbound: string
-  conf: Config
-  dest_node?: number
-  dest_device: number
-}
+export type PendingRuleData = Omit<RuleData, "id" | "user_id" | "sync" | "status" | "dest_sync">
 
 export interface RuleTarget {
   Host: string

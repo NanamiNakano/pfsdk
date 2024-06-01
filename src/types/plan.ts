@@ -1,5 +1,5 @@
 import type { BasicResponse, Config } from "./common"
-import type { PermissionGroup } from "./permission"
+import type { GroupData } from "./permission"
 import type { UserData } from "./user"
 
 export interface PlanData {
@@ -28,13 +28,24 @@ export interface PlanData {
   note: string
 }
 
-export type PlanListResponse = BasicResponse & {
-  Permission?: PermissionGroup[]
+export type PendingPlanData = Omit<PlanData, "id">
+
+export type ClientPlanDataListResponse = BasicResponse & {
+  Permission?: GroupData[]
   Plan?: PlanData[]
 }
 
+export type PlanDataListResponse = BasicResponse & {
+  Data?: PlanData[]
+  Count?: number
+}
+
+export type PlanDataResponse = BasicResponse & {
+  Data?: PlanData
+}
+
 export type CurrentPlanResponse = BasicResponse & {
-  Permission?: PermissionGroup
+  Permission?: GroupData
   Plan?: PlanData
   User?: UserData
 }

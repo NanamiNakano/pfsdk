@@ -1,6 +1,6 @@
 import type { AxiosInstance } from "axios"
 import axios from "axios"
-import type { BasicResponse, CurrentPlanResponse, PlanListResponse } from "../types"
+import type { BasicResponse, ClientPlanDataListResponse, CurrentPlanResponse } from "../types"
 
 export class Plan {
   private axiosInstance: AxiosInstance
@@ -12,10 +12,10 @@ export class Plan {
   /**
    * Get a list of available plans
    */
-  async getCart(): Promise<PlanListResponse> {
+  async getCart(): Promise<ClientPlanDataListResponse> {
     try {
       const response = await this.axiosInstance.get("/cart")
-      return response.data as PlanListResponse
+      return response.data as ClientPlanDataListResponse
     }
     catch (error) {
       if (axios.isAxiosError(error) && error.response)
