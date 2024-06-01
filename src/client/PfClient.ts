@@ -51,7 +51,7 @@ export class PfClient {
     this.admin = new Admin(this.axiosInstance)
     this.auth = new Auth(this.axiosInstance)
     this.affiliate = new Affiliate(this.axiosInstance)
-    this.announcement = new Announcement(this.axiosInstance)
+    this.announcement = new Announcement(this.axiosInstance, false)
     this.plan = new Plan(this.axiosInstance)
     this.node = new Node(this.axiosInstance)
     this.user = new User(this.axiosInstance)

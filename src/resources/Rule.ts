@@ -16,7 +16,7 @@ export class Rule {
 
   constructor(axiosInstance: AxiosInstance, nat: boolean, admin: boolean) {
     this.axiosInstance = axiosInstance
-    nat ? this.endpoint = "/nat_forward_rule" : this.endpoint = "/forward_rule"
+    this.endpoint = nat ? "/nat_forward_rule" : "/forward_rule"
 
     if (admin)
       this.endpoint = `/admin${this.endpoint}`

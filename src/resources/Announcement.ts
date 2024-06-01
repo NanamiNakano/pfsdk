@@ -3,10 +3,12 @@ import axios from "axios"
 import type { AnnouncementDataResponse, AnnouncementListResponse, QueryParams } from "../types"
 
 export class Announcement {
-  private axiosInstance: AxiosInstance
+  protected axiosInstance: AxiosInstance
+  private readonly endpoint: string
 
-  constructor(axiosInstance: AxiosInstance) {
+  constructor(axiosInstance: AxiosInstance, admin: boolean) {
     this.axiosInstance = axiosInstance
+    this.endpoint = admin ? "/admin" : ""
   }
 
   /**
@@ -23,7 +25,7 @@ export class Announcement {
   async getAnnouncements(query?: QueryParams): Promise<AnnouncementListResponse> {
     try {
       if (query) {
-        const response = await this.axiosInstance.get("/announcement", {
+        const response = await this.axiosInstance.get(`${this.endpoint}/announcement`, {
           params: query,
         })
         return response.data as AnnouncementListResponse
@@ -45,7 +47,7 @@ export class Announcement {
    */
   async getAnnouncement(id: number): Promise<AnnouncementDataResponse> {
     try {
-      const response = await this.axiosInstance.get(`/announcement?id=${id}`)
+      const response = await this.axiosInstance.get(`${this.endpoint}/announcement?id=${id}`)
       return response.data as AnnouncementDataResponse
     }
     catch (error) {

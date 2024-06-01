@@ -13,11 +13,11 @@ import type {
 
 export class Device {
   private axiosInstance: AxiosInstance
-  private endpoint: string
+  private readonly endpoint: string
 
   constructor(axiosInstance: AxiosInstance, admin: boolean) {
     this.axiosInstance = axiosInstance
-    admin ? this.endpoint = "/admin" : this.endpoint = ""
+    this.endpoint = admin ? "/admin" : ""
   }
 
   async getTunnelDevices(query?: QueryParams): Promise<TunnelDeviceListResponse> {
