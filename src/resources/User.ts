@@ -128,6 +128,7 @@ export class User {
     catch (error) {
       if (axios.isAxiosError(error) && error.response)
         return error.response.data as BasicResponse
+
       return { Msg: "Unexpected error", Ok: false }
     }
   }

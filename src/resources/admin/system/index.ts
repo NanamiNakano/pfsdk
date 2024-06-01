@@ -12,11 +12,11 @@ import { AdminPayment } from "./Payment"
 import { AdminCron } from "./Cron"
 
 export class AdminSystem {
-  private axiosInstance: AxiosInstance
   public cdkey: CDKey
   public auth: AdminAuth
   public payment: AdminPayment
   public cron: AdminCron
+  private axiosInstance: AxiosInstance
 
   constructor(axiosInstance: AxiosInstance) {
     this.axiosInstance = axiosInstance

@@ -20,6 +20,7 @@ export class System {
     catch (error) {
       if (axios.isAxiosError(error) && error.response)
         return error.response.data as SystemSettingsResponse
+
       return { Msg: "Unexpected error", Ok: false }
     }
   }
@@ -35,6 +36,7 @@ export class System {
     catch (error) {
       if (axios.isAxiosError(error) && error.response)
         return error.response.data as PluginDataResponse
+
       return { Msg: "Unexpected error", Ok: false }
     }
   }
@@ -50,6 +52,7 @@ export class System {
     catch (error) {
       if (axios.isAxiosError(error) && error.response)
         return error.response.data as PluginScriptResponse
+
       return { Msg: "Unexpected error", Ok: false }
     }
   }
