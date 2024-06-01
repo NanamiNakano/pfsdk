@@ -12,22 +12,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Node = void 0;
+exports.AdminAffiliate = void 0;
 const axios_1 = __importDefault(require("axios"));
-class Node {
+class AdminAffiliate {
     constructor(axiosInstance) {
         this.axiosInstance = axiosInstance;
     }
-    getForwardNodes(query) {
+    getBalanceLogs(query) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 if (query) {
-                    const response = yield this.axiosInstance.get("/node", {
+                    const response = yield this.axiosInstance.get("/admin/affiliate/balance/logs", {
                         params: query,
                     });
                     return response.data;
                 }
-                const response = yield this.axiosInstance.get("/node");
+                const response = yield this.axiosInstance.get("/admin/affiliate/balance/logs");
                 return response.data;
             }
             catch (error) {
@@ -37,14 +37,10 @@ class Node {
             }
         });
     }
-    /**
-     * Get a specified node
-     * @param id
-     */
-    getForwardNode(id) {
+    resetBalanceLog(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const response = yield this.axiosInstance.get(`/node?id=${id}`);
+                const response = yield this.axiosInstance.delete(`/admin/affiliate/balance/logs?user_id=${id}`);
                 return response.data;
             }
             catch (error) {
@@ -54,32 +50,16 @@ class Node {
             }
         });
     }
-    /**
-     * Get a list of node sessions
-     */
-    getNodeSessions() {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const response = yield this.axiosInstance.get("/node/session");
-                return response.data;
-            }
-            catch (error) {
-                if (axios_1.default.isAxiosError(error) && error.response)
-                    return error.response.data;
-                return { Msg: "Unexpected error", Ok: false };
-            }
-        });
-    }
-    getNatNodes(query) {
+    getAffiliates(query) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 if (query) {
-                    const response = yield this.axiosInstance.get("/nat_node", {
+                    const response = yield this.axiosInstance.get("/admin/affiliate", {
                         params: query,
                     });
                     return response.data;
                 }
-                const response = yield this.axiosInstance.get("/nat_node");
+                const response = yield this.axiosInstance.get("/admin/affiliate");
                 return response.data;
             }
             catch (error) {
@@ -89,14 +69,25 @@ class Node {
             }
         });
     }
-    /**
-     * Get a specified nat node
-     * @param id
-     */
-    getNatNode(id) {
+    getAffiliate(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const response = yield this.axiosInstance.get(`/nat_node?id=${id}`);
+                const response = yield this.axiosInstance.get(`/admin/affiliate?user_id=${id}`);
+                return response.data;
+            }
+            catch (error) {
+                if (axios_1.default.isAxiosError(error) && error.response)
+                    return error.response.data;
+                return { Msg: "Unexpected error", Ok: false };
+            }
+        });
+    }
+    payout(id, amount) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const params = new URLSearchParams();
+            params.append("money", amount.toString());
+            try {
+                const response = yield this.axiosInstance.put(`/admin/affiliate/payout?user_id=${id}`, params);
                 return response.data;
             }
             catch (error) {
@@ -107,4 +98,4 @@ class Node {
         });
     }
 }
-exports.Node = Node;
+exports.AdminAffiliate = AdminAffiliate;

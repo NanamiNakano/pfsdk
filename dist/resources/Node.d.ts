@@ -1,22 +1,22 @@
 import type { AxiosInstance } from "axios";
-import type { NatNodeDataResponse, NatNodeListResponse, NodeDataResponse, NodeListResponse, NodeSessionResponse, QueryParams } from "../types";
+import type { ForwardNodeDataResponse, ForwardNodeListResponse, NatNodeDataResponse, NatNodeListResponse, NodeSessionResponse, QueryParams } from "../types";
 export declare class Node {
     private axiosInstance;
     constructor(axiosInstance: AxiosInstance);
     /**
      * Get a list of node
      */
-    getNodes(): Promise<NodeListResponse>;
+    getForwardNodes(): Promise<ForwardNodeListResponse>;
     /**
      * Get a list of node with query params
      * @param query
      */
-    getNodes(query: QueryParams): Promise<NodeListResponse>;
+    getForwardNodes(query: QueryParams): Promise<ForwardNodeListResponse>;
     /**
      * Get a specified node
      * @param id
      */
-    getNode(id: number): Promise<NodeDataResponse>;
+    getForwardNode(id: number): Promise<ForwardNodeDataResponse>;
     /**
      * Get a list of node sessions
      */

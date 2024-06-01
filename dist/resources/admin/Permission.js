@@ -12,22 +12,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Node = void 0;
+exports.AdminPermission = void 0;
 const axios_1 = __importDefault(require("axios"));
-class Node {
+class AdminPermission {
     constructor(axiosInstance) {
         this.axiosInstance = axiosInstance;
     }
-    getForwardNodes(query) {
+    getGroups(query) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 if (query) {
-                    const response = yield this.axiosInstance.get("/node", {
+                    const response = yield this.axiosInstance.get("/admin/permission", {
                         params: query,
                     });
                     return response.data;
                 }
-                const response = yield this.axiosInstance.get("/node");
+                const response = yield this.axiosInstance.get("/admin/permission");
                 return response.data;
             }
             catch (error) {
@@ -37,14 +37,10 @@ class Node {
             }
         });
     }
-    /**
-     * Get a specified node
-     * @param id
-     */
-    getForwardNode(id) {
+    getGroup(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const response = yield this.axiosInstance.get(`/node?id=${id}`);
+                const response = yield this.axiosInstance.get(`/admin/permission?id=${id}`);
                 return response.data;
             }
             catch (error) {
@@ -54,13 +50,10 @@ class Node {
             }
         });
     }
-    /**
-     * Get a list of node sessions
-     */
-    getNodeSessions() {
+    add(group) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const response = yield this.axiosInstance.get("/node/session");
+                const response = yield this.axiosInstance.post("/admin/permission", group);
                 return response.data;
             }
             catch (error) {
@@ -70,16 +63,10 @@ class Node {
             }
         });
     }
-    getNatNodes(query) {
+    modify(id, group) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                if (query) {
-                    const response = yield this.axiosInstance.get("/nat_node", {
-                        params: query,
-                    });
-                    return response.data;
-                }
-                const response = yield this.axiosInstance.get("/nat_node");
+                const response = yield this.axiosInstance.put(`/admin/permission?id=${id}`, group);
                 return response.data;
             }
             catch (error) {
@@ -89,14 +76,10 @@ class Node {
             }
         });
     }
-    /**
-     * Get a specified nat node
-     * @param id
-     */
-    getNatNode(id) {
+    delete(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const response = yield this.axiosInstance.get(`/nat_node?id=${id}`);
+                const response = yield this.axiosInstance.delete(`/admin/permission?id=${id}`);
                 return response.data;
             }
             catch (error) {
@@ -107,4 +90,4 @@ class Node {
         });
     }
 }
-exports.Node = Node;
+exports.AdminPermission = AdminPermission;

@@ -1,8 +1,9 @@
 import type { AxiosInstance } from "axios";
 import type { InvoiceDataResponse, InvoiceListResponse, QueryParams } from "../types";
 export declare class Invoice {
-    private axiosInstance;
-    constructor(axiosInstance: AxiosInstance);
+    protected axiosInstance: AxiosInstance;
+    private readonly endpoint;
+    constructor(axiosInstance: AxiosInstance, admin: boolean);
     /**
      * Get a list of invoices
      */

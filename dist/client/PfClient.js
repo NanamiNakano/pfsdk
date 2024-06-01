@@ -27,14 +27,14 @@ class PfClient {
         this.admin = new resources_1.Admin(this.axiosInstance);
         this.auth = new resources_1.Auth(this.axiosInstance);
         this.affiliate = new resources_1.Affiliate(this.axiosInstance);
-        this.announcement = new resources_1.Announcement(this.axiosInstance);
+        this.announcement = new resources_1.Announcement(this.axiosInstance, false);
         this.plan = new resources_1.Plan(this.axiosInstance);
         this.node = new resources_1.Node(this.axiosInstance);
         this.user = new resources_1.User(this.axiosInstance);
-        this.forwardRule = new resources_1.Rule(this.axiosInstance, false);
-        this.natRule = new resources_1.Rule(this.axiosInstance, true);
-        this.device = new resources_1.Device(this.axiosInstance);
-        this.invoice = new resources_1.Invoice(this.axiosInstance);
+        this.forwardRule = new resources_1.Rule(this.axiosInstance, false, false);
+        this.natRule = new resources_1.Rule(this.axiosInstance, true, false);
+        this.device = new resources_1.Device(this.axiosInstance, false);
+        this.invoice = new resources_1.Invoice(this.axiosInstance, false);
         this.payment = new resources_1.Payment(this.axiosInstance);
         this.system = new resources_1.System(this.axiosInstance);
     }

@@ -1,9 +1,9 @@
 import type { AxiosInstance } from "axios";
 import type { BasicResponse, PendingRuleData, QueryParams, RuleDataResponse, RuleDebugResponse, RuleListResponse, RuleTrafficStatisticsResponse } from "../types";
 export declare class Rule {
-    private axiosInstance;
+    axiosInstance: AxiosInstance;
     private readonly endpoint;
-    constructor(axiosInstance: AxiosInstance, nat: boolean);
+    constructor(axiosInstance: AxiosInstance, nat: boolean, admin: boolean);
     /**
      * Get rule list
      * @param query

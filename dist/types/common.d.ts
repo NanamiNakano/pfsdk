@@ -14,3 +14,7 @@ export interface QueryParams {
 export interface Config {
     [key: string]: string;
 }
+export interface Option {
+    Name: string;
+    Type: string;
+}

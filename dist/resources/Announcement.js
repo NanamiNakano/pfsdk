@@ -15,14 +15,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Announcement = void 0;
 const axios_1 = __importDefault(require("axios"));
 class Announcement {
-    constructor(axiosInstance) {
+    constructor(axiosInstance, admin) {
         this.axiosInstance = axiosInstance;
+        this.endpoint = admin ? "/admin" : "";
     }
     getAnnouncements(query) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 if (query) {
-                    const response = yield this.axiosInstance.get("/announcement", {
+                    const response = yield this.axiosInstance.get(`${this.endpoint}/announcement`, {
                         params: query,
                     });
                     return response.data;
@@ -44,7 +45,7 @@ class Announcement {
     getAnnouncement(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const response = yield this.axiosInstance.get(`/announcement?id=${id}`);
+                const response = yield this.axiosInstance.get(`${this.endpoint}/announcement?id=${id}`);
                 return response.data;
             }
             catch (error) {

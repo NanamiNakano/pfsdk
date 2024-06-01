@@ -12,23 +12,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Invoice = void 0;
+exports.AdminAnnouncement = void 0;
 const axios_1 = __importDefault(require("axios"));
-class Invoice {
-    constructor(axiosInstance, admin) {
-        this.axiosInstance = axiosInstance;
-        this.endpoint = admin ? "/admin" : "";
+const Announcement_1 = require("../Announcement");
+class AdminAnnouncement extends Announcement_1.Announcement {
+    constructor(axiosInstance) {
+        super(axiosInstance, true);
     }
-    getInvoices(query) {
+    add(announcement) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                if (query) {
-                    const response = yield this.axiosInstance.get(`${this.endpoint}/invoice`, {
-                        params: query,
-                    });
-                    return response.data;
-                }
-                const response = yield this.axiosInstance.get(`${this.endpoint}/invoice`);
+                const response = yield this.axiosInstance.post("/admin/announcement", announcement);
                 return response.data;
             }
             catch (error) {
@@ -38,14 +32,23 @@ class Invoice {
             }
         });
     }
-    /**
-     * Get a specified invoice
-     * @param id
-     */
-    getInvoice(id) {
+    modify(id, announcement) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const response = yield this.axiosInstance.get(`${this.endpoint}/invoice?id=${id}`);
+                const response = yield this.axiosInstance.put(`/admin/announcement?id=${id}`, announcement);
+                return response.data;
+            }
+            catch (error) {
+                if (axios_1.default.isAxiosError(error) && error.response)
+                    return error.response.data;
+                return { Msg: "Unexpected error", Ok: false };
+            }
+        });
+    }
+    delete(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const response = yield this.axiosInstance.delete(`/admin/announcement?id=${id}`);
                 return response.data;
             }
             catch (error) {
@@ -56,4 +59,4 @@ class Invoice {
         });
     }
 }
-exports.Invoice = Invoice;
+exports.AdminAnnouncement = AdminAnnouncement;

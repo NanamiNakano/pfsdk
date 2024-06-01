@@ -2,7 +2,8 @@ import type { AxiosInstance } from "axios";
 import type { BasicResponse, NatDeviceDataResponse, NatDeviceListResponse, PendingNatDeviceData, PendingTunnelDeviceData, QueryParams, TunnelDeviceDataResponse, TunnelDeviceListResponse } from "../types";
 export declare class Device {
     private axiosInstance;
-    constructor(axiosInstance: AxiosInstance);
+    private readonly endpoint;
+    constructor(axiosInstance: AxiosInstance, admin: boolean);
     getTunnelDevices(query?: QueryParams): Promise<TunnelDeviceListResponse>;
     getNatDevices(query?: QueryParams): Promise<NatDeviceListResponse>;
     getTunnelDevice(id: number): Promise<TunnelDeviceDataResponse>;

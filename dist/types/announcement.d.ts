@@ -5,6 +5,7 @@ export interface AnnouncementData {
     content: string;
     edit_at: string;
 }
+export type PendingAnnouncementData = Omit<AnnouncementData, "id" | "edit_at">;
 export type AnnouncementListResponse = BasicResponse & {
     Data?: AnnouncementData[];
     Count?: number;

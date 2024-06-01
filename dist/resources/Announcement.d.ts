@@ -1,8 +1,9 @@
 import type { AxiosInstance } from "axios";
 import type { AnnouncementDataResponse, AnnouncementListResponse, QueryParams } from "../types";
 export declare class Announcement {
-    private axiosInstance;
-    constructor(axiosInstance: AxiosInstance);
+    protected axiosInstance: AxiosInstance;
+    private readonly endpoint;
+    constructor(axiosInstance: AxiosInstance, admin: boolean);
     /**
      * Get a list of announcements
      */

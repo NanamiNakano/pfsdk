@@ -12,42 +12,57 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Device = void 0;
+exports.AdminPayment = void 0;
 const axios_1 = __importDefault(require("axios"));
-class Device {
-    constructor(axiosInstance, admin) {
+class AdminPayment {
+    constructor(axiosInstance) {
         this.axiosInstance = axiosInstance;
-        this.endpoint = admin ? "/admin" : "";
     }
-    getTunnelDevices(query) {
+    getGatewaySettings(query) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                let response;
                 if (query) {
-                    const response = yield this.axiosInstance.get(`${this.endpoint}/tunnel_device`, {
+                    response = yield this.axiosInstance.get("/admin/gateway", {
                         params: query,
                     });
-                    return response.data;
                 }
-                const response = yield this.axiosInstance.get(`${this.endpoint}/tunnel_device`);
-                return response.data;
-            }
-            catch (error) {
-                if (axios_1.default.isAxiosError(error) && error.response)
-                    return error.response.data;
-                return { Msg: "Unexpected error", Ok: false };
-            }
-        });
-    }
-    getNatDevices(query) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                if (query) {
-                    const response = yield this.axiosInstance.get(`${this.endpoint}/nat_device`, {
-                        params: query,
-                    });
-                    return response.data;
+                else {
+                    response = yield this.axiosInstance.get("/admin/gateway");
                 }
-                const response = yield this.axiosInstance.get(`${this.endpoint}/nat_device`);
+                return {
+                    Data: this.parseSettings(response.data.Data),
+                    Count: response.data.Count,
+                    Ok: response.data.Ok,
+                };
+            }
+            catch (error) {
+                if (axios_1.default.isAxiosError(error) && error.response)
+                    return error.response.data;
+                return { Msg: "Unexpected error", Ok: false };
+            }
+        });
+    }
+    getGatewaySetting(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const response = yield this.axiosInstance.get(`/admin/gateway?id=${id}`);
+                return {
+                    Data: this.parseSetting(response.data.Data),
+                    Ok: response.data.Ok,
+                };
+            }
+            catch (error) {
+                if (axios_1.default.isAxiosError(error) && error.response)
+                    return error.response.data;
+                return { Msg: "Unexpected error", Ok: false };
+            }
+        });
+    }
+    getGatewayMetas() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const response = yield this.axiosInstance.get("/admin/gateway/meta");
                 return response.data;
             }
             catch (error) {
@@ -57,10 +72,10 @@ class Device {
             }
         });
     }
-    getTunnelDevice(id) {
+    getGatewayOption(name) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const response = yield this.axiosInstance.get(`${this.endpoint}/tunnel_device?id=${id}`);
+                const response = yield this.axiosInstance.get(`/admin/gateway/meta?name=${name}`);
                 return response.data;
             }
             catch (error) {
@@ -70,10 +85,17 @@ class Device {
             }
         });
     }
-    getNatDevice(id) {
+    add(gateway) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const response = yield this.axiosInstance.get(`${this.endpoint}/nat_device?id=${id}`);
+                const data = {
+                    name: gateway.name,
+                    type: gateway.type,
+                    fee: gateway.fee,
+                };
+                for (let i = 0; i < gateway.config.length; i++)
+                    data[`configoption${i + 1}`] = gateway.config[i];
+                const response = yield this.axiosInstance.post("/admin/gateway", data);
                 return response.data;
             }
             catch (error) {
@@ -83,10 +105,17 @@ class Device {
             }
         });
     }
-    addTunnelDevice(device) {
+    modify(id, gateway) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const response = yield this.axiosInstance.post("/tunnel_device", device);
+                const data = {
+                    name: gateway.name,
+                    type: gateway.type,
+                    fee: gateway.fee,
+                };
+                for (let i = 0; i < gateway.config.length; i++)
+                    data[`configoption${i + 1}`] = gateway.config[i];
+                const response = yield this.axiosInstance.put(`/admin/gateway?id=${id}`, data);
                 return response.data;
             }
             catch (error) {
@@ -96,10 +125,10 @@ class Device {
             }
         });
     }
-    addNatDevice(device) {
+    delete(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const response = yield this.axiosInstance.post("/nat_device", device);
+                const response = yield this.axiosInstance.delete(`/admin/gateway?id=${id}`);
                 return response.data;
             }
             catch (error) {
@@ -109,57 +138,23 @@ class Device {
             }
         });
     }
-    modifyTunnelDevice(id, device) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const response = yield this.axiosInstance.put(`/tunnel_device?id=${id}`, device);
-                return response.data;
-            }
-            catch (error) {
-                if (axios_1.default.isAxiosError(error) && error.response)
-                    return error.response.data;
-                return { Msg: "Unexpected error", Ok: false };
-            }
-        });
+    parseSetting(rawSettings) {
+        const data = {
+            id: rawSettings.id,
+            name: rawSettings.name,
+            type: rawSettings.type,
+            fee: rawSettings.fee,
+            config: [],
+        };
+        let index = 1;
+        while (rawSettings[`configoption${index}`]) {
+            data.config.push(rawSettings[`configoption${index}`]);
+            index++;
+        }
+        return data;
     }
-    modifyNatDevice(id, device) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const response = yield this.axiosInstance.put(`/nat_device?id=${id}`, device);
-                return response.data;
-            }
-            catch (error) {
-                if (axios_1.default.isAxiosError(error) && error.response)
-                    return error.response.data;
-                return { Msg: "Unexpected error", Ok: false };
-            }
-        });
-    }
-    deleteTunnelDevice(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const response = yield this.axiosInstance.delete(`/tunnel_device?id=${id}`);
-                return response.data;
-            }
-            catch (error) {
-                if (axios_1.default.isAxiosError(error) && error.response)
-                    return error.response.data;
-                return { Msg: "Unexpected error", Ok: false };
-            }
-        });
-    }
-    deleteNatDevice(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const response = yield this.axiosInstance.delete(`/nat_device?id=${id}`);
-                return response.data;
-            }
-            catch (error) {
-                if (axios_1.default.isAxiosError(error) && error.response)
-                    return error.response.data;
-                return { Msg: "Unexpected error", Ok: false };
-            }
-        });
+    parseSettings(rawSettings) {
+        return rawSettings.map((settings) => this.parseSetting(settings));
     }
 }
-exports.Device = Device;
+exports.AdminPayment = AdminPayment;

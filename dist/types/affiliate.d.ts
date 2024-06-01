@@ -14,6 +14,7 @@ export type AffiliateBalanceLogResponse = BasicResponse & {
     Count?: number;
 };
 export interface AffiliateData {
+    id: number;
     user_id: number;
     code: string;
     balance: string;
@@ -21,4 +22,8 @@ export interface AffiliateData {
 }
 export type AffiliateDataResponse = BasicResponse & {
     Data?: AffiliateData;
+};
+export type AffiliateDataListResponse = BasicResponse & {
+    Data?: AffiliateData[];
+    Count?: number;
 };

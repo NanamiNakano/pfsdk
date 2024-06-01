@@ -12,40 +12,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Invoice = void 0;
+exports.AdminInvoice = void 0;
 const axios_1 = __importDefault(require("axios"));
-class Invoice {
-    constructor(axiosInstance, admin) {
-        this.axiosInstance = axiosInstance;
-        this.endpoint = admin ? "/admin" : "";
+const Invoice_1 = require("../Invoice");
+class AdminInvoice extends Invoice_1.Invoice {
+    constructor(axiosInstance) {
+        super(axiosInstance, true);
     }
-    getInvoices(query) {
+    makeUp(id) {
         return __awaiter(this, void 0, void 0, function* () {
+            const params = new URLSearchParams();
+            params.append("id", id.toString());
             try {
-                if (query) {
-                    const response = yield this.axiosInstance.get(`${this.endpoint}/invoice`, {
-                        params: query,
-                    });
-                    return response.data;
-                }
-                const response = yield this.axiosInstance.get(`${this.endpoint}/invoice`);
-                return response.data;
-            }
-            catch (error) {
-                if (axios_1.default.isAxiosError(error) && error.response)
-                    return error.response.data;
-                return { Msg: "Unexpected error", Ok: false };
-            }
-        });
-    }
-    /**
-     * Get a specified invoice
-     * @param id
-     */
-    getInvoice(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const response = yield this.axiosInstance.get(`${this.endpoint}/invoice?id=${id}`);
+                const response = yield this.axiosInstance.post("/admin/invoices", params);
                 return response.data;
             }
             catch (error) {
@@ -56,4 +35,4 @@ class Invoice {
         });
     }
 }
-exports.Invoice = Invoice;
+exports.AdminInvoice = AdminInvoice;

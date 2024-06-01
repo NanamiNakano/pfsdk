@@ -12,22 +12,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Node = void 0;
+exports.AdminSystem = void 0;
 const axios_1 = __importDefault(require("axios"));
-class Node {
+const CDKey_1 = require("./CDKey");
+const Auth_1 = require("./Auth");
+const Payment_1 = require("./Payment");
+const Cron_1 = require("./Cron");
+class AdminSystem {
     constructor(axiosInstance) {
         this.axiosInstance = axiosInstance;
+        this.cdkey = new CDKey_1.CDKey(axiosInstance);
+        this.auth = new Auth_1.AdminAuth(axiosInstance);
+        this.payment = new Payment_1.AdminPayment(axiosInstance);
+        this.cron = new Cron_1.AdminCron(axiosInstance);
     }
-    getForwardNodes(query) {
+    backupDatabase() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                if (query) {
-                    const response = yield this.axiosInstance.get("/node", {
-                        params: query,
-                    });
-                    return response.data;
-                }
-                const response = yield this.axiosInstance.get("/node");
+                const response = yield this.axiosInstance.put("admin/database/backup");
                 return response.data;
             }
             catch (error) {
@@ -37,14 +39,12 @@ class Node {
             }
         });
     }
-    /**
-     * Get a specified node
-     * @param id
-     */
-    getForwardNode(id) {
+    recoverDatabase(file) {
         return __awaiter(this, void 0, void 0, function* () {
+            const formData = new FormData();
+            formData.append("file", file);
             try {
-                const response = yield this.axiosInstance.get(`/node?id=${id}`);
+                const response = yield this.axiosInstance.put("/admin/database/recover", formData);
                 return response.data;
             }
             catch (error) {
@@ -54,13 +54,10 @@ class Node {
             }
         });
     }
-    /**
-     * Get a list of node sessions
-     */
-    getNodeSessions() {
+    getSettings() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const response = yield this.axiosInstance.get("/node/session");
+                const response = yield this.axiosInstance.get("/admin/settings");
                 return response.data;
             }
             catch (error) {
@@ -70,33 +67,10 @@ class Node {
             }
         });
     }
-    getNatNodes(query) {
+    modifySettings(settings) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                if (query) {
-                    const response = yield this.axiosInstance.get("/nat_node", {
-                        params: query,
-                    });
-                    return response.data;
-                }
-                const response = yield this.axiosInstance.get("/nat_node");
-                return response.data;
-            }
-            catch (error) {
-                if (axios_1.default.isAxiosError(error) && error.response)
-                    return error.response.data;
-                return { Msg: "Unexpected error", Ok: false };
-            }
-        });
-    }
-    /**
-     * Get a specified nat node
-     * @param id
-     */
-    getNatNode(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const response = yield this.axiosInstance.get(`/nat_node?id=${id}`);
+                const response = yield this.axiosInstance.post("/admin/settings", settings);
                 return response.data;
             }
             catch (error) {
@@ -107,4 +81,4 @@ class Node {
         });
     }
 }
-exports.Node = Node;
+exports.AdminSystem = AdminSystem;

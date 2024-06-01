@@ -17,19 +17,7 @@ export interface RuleData {
     dest_device: number;
     dest_sync: boolean;
 }
-export interface PendingRuleData {
-    node_id: number;
-    name: string;
-    mode: number;
-    protocol: string;
-    bind: string;
-    targets: RuleTarget[];
-    proxy_protocol: number;
-    outbound: string;
-    conf: Config;
-    dest_node?: number;
-    dest_device: number;
-}
+export type PendingRuleData = Omit<RuleData, "id" | "user_id" | "sync" | "status" | "dest_sync">;
 export interface RuleTarget {
     Host: string;
     Port: number;
@@ -51,7 +39,7 @@ export type RuleTrafficStatisticsResponse = BasicResponse & {
     Data?: RuleTrafficStatistic[];
 };
 export interface RuleDebugData {
-    Timestamp: string;
+    Timestarp: string;
     Error: number;
     Status: string;
     MaxConn: number;

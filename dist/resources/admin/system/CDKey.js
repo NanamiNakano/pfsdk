@@ -12,29 +12,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Rule = void 0;
+exports.CDKey = void 0;
 const axios_1 = __importDefault(require("axios"));
-class Rule {
-    constructor(axiosInstance, nat, admin) {
+class CDKey {
+    constructor(axiosInstance) {
         this.axiosInstance = axiosInstance;
-        this.endpoint = nat ? "/nat_forward_rule" : "/forward_rule";
-        if (admin)
-            this.endpoint = `/admin${this.endpoint}`;
     }
-    /**
-     * Get rule list
-     * @param query
-     */
-    getRuleList(query) {
+    getKeys(query) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 if (query) {
-                    const response = yield this.axiosInstance.get(this.endpoint, {
+                    const response = yield this.axiosInstance.get("/admin/cdkey", {
                         params: query,
                     });
                     return response.data;
                 }
-                const response = yield this.axiosInstance.get(this.endpoint);
+                const response = yield this.axiosInstance.get("/admin/cdkey");
                 return response.data;
             }
             catch (error) {
@@ -44,14 +37,10 @@ class Rule {
             }
         });
     }
-    /**
-     * Get a specified rule
-     * @param id
-     */
-    getRule(id) {
+    getKey(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const response = yield this.axiosInstance.get(`${this.endpoint}?id=${id}`);
+                const response = yield this.axiosInstance.get(`/admin/cdkey?id=${id}`);
                 return response.data;
             }
             catch (error) {
@@ -61,14 +50,10 @@ class Rule {
             }
         });
     }
-    /**
-     * Add a rule
-     * @param rule
-     */
-    add(rule) {
+    add(key) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const response = yield this.axiosInstance.post(this.endpoint, rule);
+                const response = yield this.axiosInstance.post("/admin/cdkey", key);
                 return response.data;
             }
             catch (error) {
@@ -78,15 +63,10 @@ class Rule {
             }
         });
     }
-    /**
-     * Modify a rule
-     * @param id
-     * @param rule
-     */
-    modify(id, rule) {
+    modify(id, key) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const response = yield this.axiosInstance.put(`${this.endpoint}?id=${id}`, rule);
+                const response = yield this.axiosInstance.put(`/admin/cdkey?id=${id}`, key);
                 return response.data;
             }
             catch (error) {
@@ -96,14 +76,10 @@ class Rule {
             }
         });
     }
-    /**
-     * Delete a rule
-     * @param id
-     */
     delete(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const response = yield this.axiosInstance.delete(`${this.endpoint}?id=${id}`);
+                const response = yield this.axiosInstance.delete(`/admin/cdkey?id=${id}`);
                 return response.data;
             }
             catch (error) {
@@ -113,71 +89,16 @@ class Rule {
             }
         });
     }
-    /**
-     * Restart a rule
-     * @param id
-     */
-    restart(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const response = yield this.axiosInstance.get(`${this.endpoint}/restart?id=${id}`);
-                return response.data;
-            }
-            catch (error) {
-                if (axios_1.default.isAxiosError(error) && error.response)
-                    return error.response.data;
-                return { Msg: "Unexpected error", Ok: false };
-            }
-        });
-    }
-    /**
-     * Stop a rule
-     * @param id
-     */
-    stop(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const response = yield this.axiosInstance.get(`${this.endpoint}/stop?id=${id}`);
-                return response.data;
-            }
-            catch (error) {
-                if (axios_1.default.isAxiosError(error) && error.response)
-                    return error.response.data;
-                return { Msg: "Unexpected error", Ok: false };
-            }
-        });
-    }
-    /**
-     * Start a rule
-     * @param id
-     */
-    start(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const response = yield this.axiosInstance.get(`${this.endpoint}/start?id=${id}`);
-                return response.data;
-            }
-            catch (error) {
-                if (axios_1.default.isAxiosError(error) && error.response)
-                    return error.response.data;
-                return { Msg: "Unexpected error", Ok: false };
-            }
-        });
-    }
-    /**
-     * Get rule traffic's statistics
-     * @param query
-     */
-    getStatistics(query) {
+    getLogs(query) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 if (query) {
-                    const response = yield this.axiosInstance.get(`${this.endpoint}/statistics`, {
+                    const response = yield this.axiosInstance.get("/admin/cdkey/logs", {
                         params: query,
                     });
                     return response.data;
                 }
-                const response = yield this.axiosInstance.get(`${this.endpoint}/statistics`);
+                const response = yield this.axiosInstance.get("/admin/cdkey/logs");
                 return response.data;
             }
             catch (error) {
@@ -187,34 +108,11 @@ class Rule {
             }
         });
     }
-    /**
-     * Reset a specified rule's traffic
-     * @param id
-     */
-    resetStatistic(id) {
+    resetLog(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const response = yield this.axiosInstance.delete(`${this.endpoint}/statistics?id=${id}`);
+                const response = yield this.axiosInstance.delete(`/admin/cdkey/logs?id=${id}`);
                 return response.data;
-            }
-            catch (error) {
-                if (axios_1.default.isAxiosError(error) && error.response)
-                    return error.response.data;
-                return { Msg: "Unexpected error", Ok: false };
-            }
-        });
-    }
-    /**
-     * Debug a rule
-     * @param id
-     */
-    debug(id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const response = yield this.axiosInstance.get(`${this.endpoint}/debug?id=${id}`);
-                if (response.data.InBound)
-                    return response.data;
-                return { Msg: "Unable to connect in bound node", Ok: false };
             }
             catch (error) {
                 if (axios_1.default.isAxiosError(error) && error.response)
@@ -224,4 +122,4 @@ class Rule {
         });
     }
 }
-exports.Rule = Rule;
+exports.CDKey = CDKey;
