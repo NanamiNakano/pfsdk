@@ -15,12 +15,12 @@ beforeAll(async () => {
 
 describe("Node module", () => {
   test("Get available nodes", async () => {
-    const result = await client.node.getNodes(query)
+    const result = await client.node.getForwardNodes(query)
     expect(result.Ok).toBeTruthy()
   })
 
   test("Get a specified node", async () => {
-    const result = await client.node.getNode(1)
+    const result = await client.node.getForwardNode(1)
     expect(result.Ok).toBeTruthy()
   })
 

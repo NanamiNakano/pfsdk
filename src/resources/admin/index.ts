@@ -4,6 +4,7 @@ import { AdminAffiliate } from "./Affiliate"
 import { AdminRule } from "./Rule"
 import { AdminPlan } from "./Plan"
 import { AdminPermission } from "./Permission"
+import { AdminNode } from "./Node"
 
 export class Admin {
   public affiliate: AdminAffiliate
@@ -12,6 +13,7 @@ export class Admin {
   public natRule: AdminRule
   public plan: AdminPlan
   public permission: AdminPermission
+  public node: AdminNode
 
   constructor(axiosInstance: AxiosInstance) {
     this.affiliate = new AdminAffiliate(axiosInstance)
@@ -20,5 +22,6 @@ export class Admin {
     this.natRule = new AdminRule(axiosInstance, true)
     this.plan = new AdminPlan(axiosInstance)
     this.permission = new AdminPermission(axiosInstance)
+    this.node = new AdminNode(axiosInstance)
   }
 }

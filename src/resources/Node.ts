@@ -1,10 +1,10 @@
 import type { AxiosInstance } from "axios"
 import axios from "axios"
 import type {
+  ForwardNodeDataResponse,
+  ForwardNodeListResponse,
   NatNodeDataResponse,
   NatNodeListResponse,
-  NodeDataResponse,
-  NodeListResponse,
   NodeSessionResponse,
   QueryParams,
 } from "../types"
@@ -19,24 +19,24 @@ export class Node {
   /**
    * Get a list of node
    */
-  async getNodes(): Promise<NodeListResponse>
+  async getForwardNodes(): Promise<ForwardNodeListResponse>
 
   /**
    * Get a list of node with query params
    * @param query
    */
-  async getNodes(query: QueryParams): Promise<NodeListResponse>
+  async getForwardNodes(query: QueryParams): Promise<ForwardNodeListResponse>
 
-  async getNodes(query?: QueryParams): Promise<NodeListResponse> {
+  async getForwardNodes(query?: QueryParams): Promise<ForwardNodeListResponse> {
     try {
       if (query) {
         const response = await this.axiosInstance.get("/node", {
           params: query,
         })
-        return response.data as NodeListResponse
+        return response.data as ForwardNodeListResponse
       }
       const response = await this.axiosInstance.get("/node")
-      return response.data as NodeListResponse
+      return response.data as ForwardNodeListResponse
     }
     catch (error) {
       if (axios.isAxiosError(error) && error.response)
@@ -50,10 +50,10 @@ export class Node {
    * Get a specified node
    * @param id
    */
-  async getNode(id: number): Promise<NodeDataResponse> {
+  async getForwardNode(id: number): Promise<ForwardNodeDataResponse> {
     try {
       const response = await this.axiosInstance.get(`/node?id=${id}`)
-      return response.data as NodeDataResponse
+      return response.data as ForwardNodeDataResponse
     }
     catch (error) {
       if (axios.isAxiosError(error) && error.response)
