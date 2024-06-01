@@ -47,7 +47,7 @@ export type RuleTrafficStatisticsResponse = BasicResponse & {
 }
 
 export interface RuleDebugData {
-  Timestamp: string
+  Timestarp: string // FIXME: Typo
   Error: number
   Status: string
   MaxConn: number

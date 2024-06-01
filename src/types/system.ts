@@ -51,3 +51,36 @@ export type PluginDataResponse = BasicResponse & {
 export type PluginScriptResponse = BasicResponse & {
   Data?: string[]
 }
+
+export interface CDKeyData {
+  id: number
+  name: string
+  code: string
+  qty: number
+  type: string
+  balance: number
+  plan_id: number
+}
+
+export type CDKeyDataListResponse = BasicResponse & {
+  Data?: CDKeyData[]
+  Count?: number
+}
+
+export type CDKeyDataResponse = BasicResponse & {
+  Data?: CDKeyData
+}
+
+export type PendingCDKeyData = Omit<CDKeyData, "id">
+
+export interface CDKeyLog {
+  id: number
+  user_id: number
+  cdkey_id: number
+  created_at: string
+}
+
+export type CDKeyLogResponse = BasicResponse & {
+  Data?: CDKeyLog[]
+  Count?: number
+}
