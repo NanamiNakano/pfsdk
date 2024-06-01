@@ -5,6 +5,7 @@
 export * from "./Affiliate"
 export * from "./Announcement"
 export * from "./Auth"
+export * from "./Device"
 export * from "./Invoice"
 export * from "./Node"
 export * from "./Payment"
