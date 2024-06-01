@@ -13,20 +13,22 @@ import type {
 
 export class Device {
   private axiosInstance: AxiosInstance
+  private endpoint: string
 
-  constructor(axiosInstance: AxiosInstance) {
+  constructor(axiosInstance: AxiosInstance, admin: boolean) {
     this.axiosInstance = axiosInstance
+    admin ? this.endpoint = "/admin" : this.endpoint = ""
   }
 
   async getTunnelDevices(query?: QueryParams): Promise<TunnelDeviceListResponse> {
     try {
       if (query) {
-        const response = await this.axiosInstance.get("/tunnel_device", {
+        const response = await this.axiosInstance.get(`${this.endpoint}/tunnel_device`, {
           params: query,
         })
         return response.data as TunnelDeviceListResponse
       }
-      const response = await this.axiosInstance.get("/tunnel_device")
+      const response = await this.axiosInstance.get(`${this.endpoint}/tunnel_device`)
       return response.data as TunnelDeviceListResponse
     }
     catch (error) {
@@ -40,12 +42,12 @@ export class Device {
   async getNatDevices(query?: QueryParams): Promise<NatDeviceListResponse> {
     try {
       if (query) {
-        const response = await this.axiosInstance.get("/nat_device", {
+        const response = await this.axiosInstance.get(`${this.endpoint}/nat_device`, {
           params: query,
         })
         return response.data as NatDeviceListResponse
       }
-      const response = await this.axiosInstance.get("/nat_device")
+      const response = await this.axiosInstance.get(`${this.endpoint}/nat_device`)
       return response.data as NatDeviceListResponse
     }
     catch (error) {
@@ -58,7 +60,7 @@ export class Device {
 
   async getTunnelDevice(id: number): Promise<TunnelDeviceDataResponse> {
     try {
-      const response = await this.axiosInstance.get(`/tunnel_device?id=${id}`)
+      const response = await this.axiosInstance.get(`${this.endpoint}/tunnel_device?id=${id}`)
       return response.data as TunnelDeviceDataResponse
     }
     catch (error) {
@@ -71,7 +73,7 @@ export class Device {
 
   async getNatDevice(id: number): Promise<NatDeviceDataResponse> {
     try {
-      const response = await this.axiosInstance.get(`/nat_device?id=${id}`)
+      const response = await this.axiosInstance.get(`${this.endpoint}/nat_device?id=${id}`)
       return response.data as NatDeviceDataResponse
     }
     catch (error) {
