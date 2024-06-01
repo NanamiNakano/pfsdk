@@ -1,4 +1,4 @@
-import type { BasicResponse } from "./common"
+import type { BasicResponse, Option } from "./common"
 
 export interface ThirdAuth {
   id: number
@@ -46,17 +46,8 @@ export type ThirdAuthMetasResponse = BasicResponse & {
   }
 }
 
-export interface ThirdAuthOptionData {
-  Name: string
-  Type: string
-}
-
 export type ThirdAuthOptionResponse = BasicResponse & {
-  Data?: ThirdAuthOptionData[]
+  Data?: Option[]
 }
 
-export interface PendingThirdAuthSettings {
-  name: string
-  type: string
-  config: string[]
-}
+export type PendingThirdAuthSettings = Omit<ThirdAuthSettings, "id">
