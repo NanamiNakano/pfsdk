@@ -14,5 +14,5 @@ export declare class PfClient {
     payment: Payment;
     system: System;
     private readonly axiosInstance;
-    constructor(endpoint: string);
+    constructor(endpoint: string, browser?: boolean);
 }

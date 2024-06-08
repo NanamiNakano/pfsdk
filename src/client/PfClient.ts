@@ -33,8 +33,8 @@ export class PfClient {
   public system: System
   private readonly axiosInstance: AxiosInstance
 
-  constructor(endpoint: string) {
-    if (typeof window === "undefined") {
+  constructor(endpoint: string, browser: boolean = true) {
+    if (!browser) {
       const jar = new CookieJar()
       this.axiosInstance = wrapper(axios.create({
         jar,

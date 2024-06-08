@@ -9,8 +9,8 @@ const axios_cookiejar_support_1 = require("axios-cookiejar-support");
 const tough_cookie_1 = require("tough-cookie");
 const resources_1 = require("../resources");
 class PfClient {
-    constructor(endpoint) {
-        if (typeof window === "undefined") {
+    constructor(endpoint, browser = true) {
+        if (!browser) {
             const jar = new tough_cookie_1.CookieJar();
             this.axiosInstance = (0, axios_cookiejar_support_1.wrapper)(axios_1.default.create({
                 jar,
