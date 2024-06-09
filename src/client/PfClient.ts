@@ -1,7 +1,5 @@
 import type { AxiosInstance } from "axios"
 import axios from "axios"
-import { wrapper } from "axios-cookiejar-support"
-import { CookieJar } from "tough-cookie"
 import {
   Admin,
   Affiliate,
@@ -32,22 +30,27 @@ export class PfClient {
   public payment: Payment
   public system: System
   private readonly axiosInstance: AxiosInstance
+  private session?: string
 
-  constructor(endpoint: string, browser: boolean = true) {
-    if (!browser) {
-      const jar = new CookieJar()
-      this.axiosInstance = wrapper(axios.create({
-        jar,
-        baseURL: `https://${endpoint}/ajax`,
-        withCredentials: true,
-      }))
-    }
-    else {
-      this.axiosInstance = axios.create({
-        baseURL: `https://${endpoint}/ajax`,
-        withCredentials: true,
-      })
-    }
+  constructor(endpoint: string) {
+    this.axiosInstance = axios.create({
+      baseURL: `https://${endpoint}/ajax`,
+      withCredentials: true,
+    })
+    this.axiosInstance.interceptors.response.use((rps) => {
+      const authorizationHeader = rps.headers["set-authorization"]
+      if (authorizationHeader)
+        this.session = authorizationHeader
+
+      return rps
+    })
+
+    this.axiosInstance.interceptors.request.use((config) => {
+      if (this.session)
+        config.headers.Authorization = this.session
+
+      return config
+    })
     this.admin = new Admin(this.axiosInstance)
     this.auth = new Auth(this.axiosInstance)
     this.affiliate = new Affiliate(this.axiosInstance)

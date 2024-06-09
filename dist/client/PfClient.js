@@ -5,25 +5,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PfClient = void 0;
 const axios_1 = __importDefault(require("axios"));
-const axios_cookiejar_support_1 = require("axios-cookiejar-support");
-const tough_cookie_1 = require("tough-cookie");
 const resources_1 = require("../resources");
 class PfClient {
-    constructor(endpoint, browser = true) {
-        if (!browser) {
-            const jar = new tough_cookie_1.CookieJar();
-            this.axiosInstance = (0, axios_cookiejar_support_1.wrapper)(axios_1.default.create({
-                jar,
-                baseURL: `https://${endpoint}/ajax`,
-                withCredentials: true,
-            }));
-        }
-        else {
-            this.axiosInstance = axios_1.default.create({
-                baseURL: `https://${endpoint}/ajax`,
-                withCredentials: true,
-            });
-        }
+    constructor(endpoint) {
+        this.axiosInstance = axios_1.default.create({
+            baseURL: `https://${endpoint}/ajax`,
+            withCredentials: true,
+        });
+        this.axiosInstance.interceptors.response.use((rps) => {
+            const authorizationHeader = rps.headers["set-authorization"];
+            if (authorizationHeader)
+                this.session = authorizationHeader;
+            return rps;
+        });
+        this.axiosInstance.interceptors.request.use((config) => {
+            if (this.session)
+                config.headers.Authorization = this.session;
+            return config;
+        });
         this.admin = new resources_1.Admin(this.axiosInstance);
         this.auth = new resources_1.Auth(this.axiosInstance);
         this.affiliate = new resources_1.Affiliate(this.axiosInstance);
