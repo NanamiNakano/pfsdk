@@ -15,12 +15,13 @@ class PfClient {
         this.axiosInstance.interceptors.response.use((rps) => {
             const authorizationHeader = rps.headers["set-authorization"];
             if (authorizationHeader)
-                this.session = authorizationHeader;
+                localStorage.setItem("Authorization", authorizationHeader);
             return rps;
         });
         this.axiosInstance.interceptors.request.use((config) => {
-            if (this.session)
-                config.headers.Authorization = this.session;
+            const authorization = localStorage.getItem("Authorization");
+            if (authorization)
+                config.headers.Authorization = authorization;
             return config;
         });
         this.admin = new resources_1.Admin(this.axiosInstance);

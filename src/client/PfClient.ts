@@ -30,7 +30,6 @@ export class PfClient {
   public payment: Payment
   public system: System
   private readonly axiosInstance: AxiosInstance
-  private session?: string
 
   constructor(endpoint: string) {
     this.axiosInstance = axios.create({
@@ -40,14 +39,15 @@ export class PfClient {
     this.axiosInstance.interceptors.response.use((rps) => {
       const authorizationHeader = rps.headers["set-authorization"]
       if (authorizationHeader)
-        this.session = authorizationHeader
+        localStorage.setItem("Authorization", authorizationHeader)
 
       return rps
     })
 
     this.axiosInstance.interceptors.request.use((config) => {
-      if (this.session)
-        config.headers.Authorization = this.session
+      const authorization = localStorage.getItem("Authorization")
+      if (authorization)
+        config.headers.Authorization = authorization
 
       return config
     })
