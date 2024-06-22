@@ -38,12 +38,13 @@ describe("Rule module", () => {
   })
 
   test("Get rule", async () => {
-    const result = await client.forwardRule.getRule(3)
+    const result = await client.forwardRule.getRule(4)
     expect(result.Ok).toBeTruthy()
   })
 
   test("Add a rule", async () => {
     const result = await client.forwardRule.add(pendingRule)
+    console.log(result)
     expect(result.Ok).toBeTruthy()
   })
 

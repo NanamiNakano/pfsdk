@@ -8,10 +8,10 @@ export interface RuleData {
   mode: number
   protocol: string
   bind: string
-  targets: RuleTarget[]
+  targets?: RuleTarget[]
   proxy_protocol: number
   outbound: string
-  conf: Config
+  conf?: Config
   status: string
   sync: boolean
   dest_node?: number
