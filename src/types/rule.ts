@@ -5,7 +5,7 @@ export interface RuleData {
   user_id: number
   node_id: number
   name: string
-  mode: number
+  mode?: number
   protocol: string
   bind: string
   targets: RuleTarget[]
@@ -15,7 +15,7 @@ export interface RuleData {
   status: string
   sync: boolean
   dest_node?: number
-  dest_device: number
+  dest_device?: number
   dest_sync: boolean
 }
 
@@ -64,11 +64,12 @@ export interface RuleDebugData {
   }
 }
 
-export interface InBoundData {
+export interface TrafficData {
   Data: RuleDebugData | string
   Ok: boolean
 }
 
 export type RuleDebugResponse = BasicResponse & {
-  InBound?: InBoundData
+  InBound?: TrafficData
+  OutBound?: TrafficData
 }
