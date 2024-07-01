@@ -23,7 +23,7 @@ export interface UserData {
   balance: number
   price: number
   period: number
-  permission: number
+  permission: 0 | 1 | 2
   token: string
   registration_date: string
 }
