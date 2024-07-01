@@ -28,7 +28,7 @@ export interface UserData {
   registration_date: string
 }
 
-export type PendingUserData = Omit<UserData, "id">
+export type PendingUserData = Omit<UserData, "id" | "username"> & Partial<Pick<UserData, "username">>
 
 export type UserDataResponse = BasicResponse & {
   Data?: UserData
