@@ -22,7 +22,7 @@ export type AdminSystemSettings = SystemSettings & {
   recaptcha_private: string
 }
 
-export type PendingAdminSystemSettings = AdminSystemSettings
+export type PendingAdminSystemSettings = Omit<AdminSystemSettings, "version">
 
 export type SystemSettingsResponse = BasicResponse & {
   Data?: SystemSettings
